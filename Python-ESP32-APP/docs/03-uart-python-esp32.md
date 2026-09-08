@@ -374,4 +374,4 @@ Python 的 `False` 會經 `json.dumps()` 轉成 JSON 的 `false`，ESP32 便會�
 
 ## 下一步
 
-下一份教材會把 UART 資料儲存為 CSV，並用 Pandas 與 Matplotlib 產生可判讀的圖表。
+前往 [將感測資料存成 CSV 並繪製趨勢圖](04-python-感測資料視覺化.md)。
