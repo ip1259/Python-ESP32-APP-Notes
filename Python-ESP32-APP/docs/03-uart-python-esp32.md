@@ -248,28 +248,38 @@ BAUD_RATE = 115200
 
 def send_led_command(ser, value):
     command = {"cmd": "led", "value": value}
-    message = json.dumps(command) + "\n"
+    message = json.dumps(command, separators=(",", ":")) + "\n"
     ser.write(message.encode("utf-8"))
     print(f"已送出：{message.strip()}")
 
 
 with serial.Serial(PORT, BAUD_RATE, timeout=3) as ser:
-    time.sleep(1)  # 讓部分 ESP32 開啟序列埠後有時間重新啟動
+    time.sleep(2)  # 讓部分 ESP32 開啟序列埠後有時間重新啟動
     ser.reset_input_buffer()
 
     send_led_command(ser, True)
 
-    while True:
+    deadline = time.monotonic() + 5
+    while time.monotonic() < deadline:
         raw_line = ser.readline().decode("utf-8", errors="replace").strip()
         if not raw_line:
-            print("等待回覆逾時")
-            break
+            continue
 
-        data = json.loads(raw_line)
+        try:
+            data = json.loads(raw_line)
+        except json.JSONDecodeError:
+            print(f"略過非 JSON 資料：{raw_line}")
+            continue
+
         if data.get("type") == "status":
             state = "開啟" if data.get("led") else "關閉"
             print(f"LED 狀態：{state}")
             break
+        if data.get("type") == "error":
+            print(f"ESP32 回覆錯誤：{data.get('message')}")
+            break
+    else:
+        print("等待 ESP32 狀態回覆逾時")
 ```
 
 執行位置：PowerShell／電腦
@@ -281,9 +291,12 @@ uv run python control_led.py
 預期結果：ESP32 的板載 LED 亮起，PowerShell 顯示：
 
 ```text
-已送出：{"cmd": "led", "value": true}
+已送出：{"cmd":"led","value":true}
 LED 狀態：開啟
 ```
+
+!!! note "為什麼 JSON 沒有空白？"
+    本頁 ESP32 範例為了聚焦 UART，暫時以完整文字比對命令。`json.dumps(..., separators=(",", ":"))` 會產生 `{"cmd":"led","value":true}`，剛好符合 ESP32 預期格式。後續教材會再介紹不依賴文字空白的資料驗證方式。
 
 ## 小練習：補上 LED 關閉命令
 
