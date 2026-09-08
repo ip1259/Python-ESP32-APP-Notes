@@ -1,0 +1,33 @@
+site_name: Python、Esp32、APP整合設計 助教整理筆記
+theme:
+  name: material
+  language: zh-TW
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/weather-night
+        name: 切換至深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: 切換至淺色模式
+  features:
+    - navigation.tabs
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - attr_list
+  - admonition
+
+nav:
+  - 首頁: index.md
+  - 開始前:
+      - 用 uv 建立 Python 虛擬環境: 01-uv與虛擬環境.md
+      - 課程準備：認識 AIoT 資料流: 02-課程準備.md
+  - USB 序列通訊:
+      - UART：讓 Python 與 ESP32 雙向通訊: 03-uart-python-esp32.md
