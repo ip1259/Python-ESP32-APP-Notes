@@ -19,6 +19,7 @@ theme:
     - navigation.tabs
     - search.suggest
     - search.highlight
+    - content.code.copy
 
 markdown_extensions:
   - attr_list
@@ -37,3 +38,5 @@ nav:
       - I2C：使用 LCD1602A 顯示 DHT11 資料: 05-i2c-lcd.md
   - 點陣顯示:
       - 74HC595：辨識並驅動裸 8×8 點陣: 06-74hc595-8x8點陣.md
+  - 本機儀表板:
+      - Gradio：建立本機 AIoT 儀表板: 07-gradio-aiot儀表板.md
