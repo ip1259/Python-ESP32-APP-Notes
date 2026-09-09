@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title description">
+  <title id="title">ESP32、DHT11、LCD1602A 與電腦的整合接線端點圖</title>
+  <desc id="description">端點式接線圖。ESP32 的 3V3、GND、GPIO 4 分別接 DHT11 的 VCC、GND、DATA；ESP32 的 3V3、GND、GPIO 21 SDA、GPIO 22 SCL 分別接 LCD1602A 的 VCC、GND、SDA、SCL。ESP32 透過 USB 序列埠連接執行 Python 儀表板的電腦。</desc>
+  <style>
+    .box { fill: #ffffff; stroke: #334155; stroke-width: 3; rx: 16; }
+    .main-title { font: 700 30px 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; fill: #0f172a; }
+    .module-title { font: 700 24px 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; fill: #0f172a; }
+    .label { font: 600 20px 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; fill: #0f172a; }
+    .pin { font: 700 18px 'Noto Sans TC', 'Microsoft JhengHei', sans-serif; fill: #ffffff; }
+    .wire { fill: none; stroke-width: 6; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+
+  <rect width="1200" height="720" fill="#f8fafc"/>
+  <text x="600" y="48" text-anchor="middle" class="main-title">整合接線端點圖</text>
+
+  <rect x="55" y="185" width="220" height="270" class="box"/>
+  <text x="165" y="225" text-anchor="middle" class="module-title">DHT11</text>
+  <rect x="92" y="265" width="146" height="42" rx="8" fill="#dc2626"/><text x="165" y="294" text-anchor="middle" class="pin">VCC</text>
+  <rect x="92" y="325" width="146" height="42" rx="8" fill="#2563eb"/><text x="165" y="354" text-anchor="middle" class="pin">DATA</text>
+  <rect x="92" y="385" width="146" height="42" rx="8" fill="#1f2937"/><text x="165" y="414" text-anchor="middle" class="pin">GND</text>
+
+  <rect x="425" y="185" width="350" height="465" class="box"/>
+  <text x="600" y="225" text-anchor="middle" class="module-title">ESP32 接線端</text>
+  <rect x="495" y="275" width="210" height="48" rx="8" fill="#dc2626"/><text x="600" y="307" text-anchor="middle" class="pin">3V3</text>
+  <rect x="495" y="335" width="210" height="48" rx="8" fill="#1f2937"/><text x="600" y="367" text-anchor="middle" class="pin">GND</text>
+  <rect x="495" y="395" width="210" height="48" rx="8" fill="#2563eb"/><text x="600" y="427" text-anchor="middle" class="pin">GPIO 4</text>
+  <rect x="495" y="455" width="210" height="48" rx="8" fill="#15803d"/><text x="600" y="487" text-anchor="middle" class="pin">GPIO 21 SDA</text>
+  <rect x="495" y="515" width="210" height="48" rx="8" fill="#a16207"/><text x="600" y="547" text-anchor="middle" class="pin">GPIO 22 SCL</text>
+  <rect x="495" y="580" width="210" height="42" rx="8" fill="#475569"/><text x="600" y="609" text-anchor="middle" class="pin">USB 序列埠</text>
+
+  <rect x="925" y="185" width="220" height="330" class="box"/>
+  <text x="1035" y="225" text-anchor="middle" class="module-title">LCD1602A</text>
+  <rect x="962" y="265" width="146" height="42" rx="8" fill="#dc2626"/><text x="1035" y="294" text-anchor="middle" class="pin">VCC</text>
+  <rect x="962" y="325" width="146" height="42" rx="8" fill="#1f2937"/><text x="1035" y="354" text-anchor="middle" class="pin">GND</text>
+  <rect x="962" y="385" width="146" height="42" rx="8" fill="#15803d"/><text x="1035" y="414" text-anchor="middle" class="pin">SDA</text>
+  <rect x="962" y="445" width="146" height="42" rx="8" fill="#a16207"/><text x="1035" y="474" text-anchor="middle" class="pin">SCL</text>
+
+  <path d="M238 286 H390 V299 H495" class="wire" stroke="#dc2626"/>
+  <path d="M238 346 H365 V419 H495" class="wire" stroke="#2563eb"/>
+  <path d="M238 406 H340 V359 H495" class="wire" stroke="#1f2937"/>
+  <path d="M705 299 H850 V286 H962" class="wire" stroke="#dc2626"/>
+  <path d="M705 359 H835 V346 H962" class="wire" stroke="#1f2937"/>
+  <path d="M705 479 H750 V406 H962" class="wire" stroke="#15803d"/>
+  <path d="M705 539 H880 V466 H962" class="wire" stroke="#a16207"/>
+
+  <path d="M600 622 V688" class="wire" stroke="#475569"/>
+  <rect x="450" y="688" width="300" height="48" class="box"/>
+  <text x="600" y="720" text-anchor="middle" class="label">電腦（Python 儀表板）</text>
+</svg>

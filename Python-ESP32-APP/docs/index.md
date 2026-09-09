@@ -27,3 +27,4 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 5. [I2C：使用 LCD1602A 顯示 DHT11 資料](05-i2c-lcd.md)
 6. [74HC595：辨識並驅動裸 8×8 點陣](06-74hc595-8x8點陣.md)
 7. [Gradio：建立本機 AIoT 儀表板](07-gradio-aiot儀表板.md)
+8. [整合專題：完成環境看板](08-整合專題.md)
