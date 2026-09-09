@@ -337,7 +337,7 @@ uv run python gradio_dashboard.py
 執行位置：Python／電腦  
 檔案：`practice_gradio_led.py`
 
-```python
+```python linenums="1" hl_lines="4-5"
 # 假設 dashboard 已由 gradio_dashboard.py 建立完成。
 
 def turn_led_on():

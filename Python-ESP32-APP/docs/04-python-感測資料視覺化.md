@@ -267,7 +267,7 @@ uv run python plot_sensor_data.py
 執行位置：Python／電腦  
 檔案：`practice_clean_data.py`
 
-```python
+```python linenums="1" hl_lines="11"
 import pandas as pd
 
 data = pd.DataFrame(

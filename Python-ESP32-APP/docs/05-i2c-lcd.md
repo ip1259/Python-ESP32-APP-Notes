@@ -201,7 +201,7 @@ void loop() {
 執行位置：Arduino IDE／ESP32  
 檔案：`practice_lcd_humidity.ino`
 
-```cpp
+```cpp linenums="1" hl_lines="6"
 float humidity = 60.0;
 
 // 已完成 lcd 初始化，且 printLine(row, text) 可以使用

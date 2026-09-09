@@ -307,7 +307,7 @@ LED 狀態：開啟
 執行位置：Python／電腦  
 檔案：`practice_led_off.py`
 
-```python
+```python linenums="1" hl_lines="5"
 # 假設 ser 已經是開啟的序列埠，且 send_led_command() 已定義完成。
 
 send_led_command(ser, True)
