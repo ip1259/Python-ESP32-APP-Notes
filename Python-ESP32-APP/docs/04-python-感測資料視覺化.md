@@ -344,4 +344,4 @@ valid_data = data.dropna(subset=["temp_c", "humidity"])
 
 ## 下一步
 
-下一份教材會使用 I2C LCD1602A，在 ESP32 端直接顯示 DHT11 溫溼度資料。
+前往 [I2C：使用 LCD1602A 顯示 DHT11 資料](05-i2c-lcd.md)。
