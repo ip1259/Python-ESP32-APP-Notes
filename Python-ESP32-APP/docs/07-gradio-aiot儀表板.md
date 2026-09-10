@@ -80,7 +80,7 @@ Gradio 的強項是讓 Python 程式很快有一個可操作的畫面。本課�
 import gradio as gr
 
 
-def say_hello():
+def say_hello() -> str:
     return "Gradio 已正常運作。"
 
 
@@ -118,6 +118,7 @@ import json
 import time
 from collections import deque
 from datetime import datetime
+from matplotlib.figure import Figure
 
 import gradio as gr
 import matplotlib.pyplot as plt
@@ -127,20 +128,22 @@ import serial
 PORT = "COM3"  # 改成你的 ESP32 COM 埠
 BAUD_RATE = 115200
 HISTORY_SIZE = 20
+JsonData = dict[str, object]
+SensorRow = dict[str, str | float]
 
 
 class SerialDashboard:
-    def __init__(self, port, baud_rate):
-        self.ser = serial.Serial(port, baud_rate, timeout=0.5)
+    def __init__(self, port: str, baud_rate: int) -> None:
+        self.ser: serial.Serial = serial.Serial(port, baud_rate, timeout=0.5)
         time.sleep(2)  # 部分 ESP32 在開啟序列埠後會重新啟動
         self.ser.reset_input_buffer()
-        self.history = deque(maxlen=HISTORY_SIZE)
+        self.history: deque[SensorRow] = deque(maxlen=HISTORY_SIZE)
 
-    def close(self):
+    def close(self) -> None:
         if self.ser.is_open:
             self.ser.close()
 
-    def read_json_line(self):
+    def read_json_line(self) -> JsonData | None:
         raw_line = self.ser.readline().decode("utf-8", errors="replace").strip()
         if not raw_line:
             return None
@@ -151,7 +154,7 @@ class SerialDashboard:
             print(f"略過非 JSON 資料：{raw_line}")
             return None
 
-    def read_sensor(self, wait_seconds=3):
+    def read_sensor(self, wait_seconds: float = 3) -> tuple[SensorRow | None, str | None]:
         deadline = time.monotonic() + wait_seconds
 
         while time.monotonic() < deadline:
@@ -179,7 +182,7 @@ class SerialDashboard:
 
         return None, "3 秒內沒有收到 sensor JSON"
 
-    def send_led_command(self, value):
+    def send_led_command(self, value: bool) -> str:
         # 先清除舊感測資料，避免把上一筆資料誤認為這次命令的回覆。
         self.ser.reset_input_buffer()
         command = {"cmd": "led", "value": value}
@@ -204,13 +207,13 @@ class SerialDashboard:
 
         return "已送出命令，但 5 秒內沒有收到 ESP32 狀態回覆"
 
-    def dataframe(self):
+    def dataframe(self) -> pd.DataFrame:
         return pd.DataFrame(
             self.history,
             columns=["timestamp", "temp_c", "humidity"],
         )
 
-    def figure(self):
+    def figure(self) -> Figure:
         data = self.dataframe()
         fig, (temp_ax, humidity_ax) = plt.subplots(2, 1, sharex=True, figsize=(8, 5))
 
@@ -233,7 +236,7 @@ class SerialDashboard:
 dashboard = SerialDashboard(PORT, BAUD_RATE)
 
 
-def refresh_dashboard():
+def refresh_dashboard() -> tuple[str, str, pd.DataFrame, Figure, str]:
     row, error_message = dashboard.read_sensor()
     data = dashboard.dataframe()
 
@@ -250,7 +253,7 @@ def refresh_dashboard():
     )
 
 
-def set_led(value):
+def set_led(value: bool) -> str:
     return dashboard.send_led_command(value)
 
 
@@ -340,7 +343,7 @@ uv run python gradio_dashboard.py
 ```python linenums="1" hl_lines="4-5"
 # 假設 dashboard 已由 gradio_dashboard.py 建立完成。
 
-def turn_led_on():
+def turn_led_on() -> str:
     # TODO: 呼叫 dashboard 的 send_led_command()，傳入 True，並直接回傳結果文字
     pass
 
@@ -354,7 +357,7 @@ led_on_button.click(turn_led_on, outputs=status)
 <summary>查看參考解答</summary>
 
 ```python
-def turn_led_on():
+def turn_led_on() -> str:
     return dashboard.send_led_command(True)
 ```
 
@@ -412,6 +415,10 @@ def turn_led_on():
 ## 延伸練習（可選）
 
 當手動更新已穩定後，為頁面加入一個「溫度提醒」文字框：當最新溫度高於你和教師約定的門檻時顯示提醒，否則顯示正常。先只修改 Python 回呼的回傳文字，不要加入新的硬體或公開網頁設定。
+
+## 延伸選讀
+
+想了解按鈕事件、最近資料與 COM 埠責任如何配合，以及本機原型的使用界線，可閱讀[延伸選讀：Gradio 事件、狀態與原型邊界](附錄-Gradio事件狀態與原型邊界.md)。這不是本節的必做步驟。
 
 ## 下一步
 

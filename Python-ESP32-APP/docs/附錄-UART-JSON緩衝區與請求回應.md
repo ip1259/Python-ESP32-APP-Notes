@@ -85,7 +85,7 @@ void loop() {
 來源片段：Python／電腦，`integrated_dashboard.py`。
 
 ```python linenums="1" hl_lines="2 4-6 11"
-def read_sensor(self):
+def read_sensor(self) -> tuple[dict[str, str | float] | None, str | None]:
     self.ser.reset_input_buffer()
     message = json.dumps({"cmd": "read_now"}, separators=(",", ":")) + "\n"
     self.ser.write(message.encode("utf-8"))
@@ -107,7 +107,7 @@ def read_sensor(self):
 來源片段：Python／電腦，`integrated_dashboard.py`。
 
 ```python linenums="1" hl_lines="2-5 7-10"
-def read_json(self):
+def read_json(self) -> dict[str, object] | None:
     raw = self.ser.readline().decode("utf-8", errors="replace").strip()
     if not raw:
         return None

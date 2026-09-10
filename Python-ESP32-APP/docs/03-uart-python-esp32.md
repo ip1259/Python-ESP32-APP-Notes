@@ -246,7 +246,7 @@ PORT = "COM3"  # 改成你的 ESP32 COM 埠
 BAUD_RATE = 115200
 
 
-def send_led_command(ser, value):
+def send_led_command(ser: serial.Serial, value: bool) -> None:
     command = {"cmd": "led", "value": value}
     message = json.dumps(command, separators=(",", ":")) + "\n"
     ser.write(message.encode("utf-8"))
@@ -371,6 +371,10 @@ Python 的 `False` 會經 `json.dumps()` 轉成 JSON 的 `false`，ESP32 便會�
 ## 延伸練習（可選）
 
 修改 `control_led.py`，讓程式依序執行「開啟 → 等待 2 秒 → 關閉」。每次送出命令後，都讀取並印出 ESP32 的狀態回覆。
+
+## 延伸選讀
+
+想了解 ESP32、Python 與不同 JSON 訊息各自的責任，可閱讀[延伸選讀：UART 程式導讀](附錄-UART程式導讀.md)。這不是本節的必做步驟。
 
 ## 下一步
 
