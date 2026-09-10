@@ -33,18 +33,19 @@ markdown_extensions:
 
 nav:
   - 首頁: index.md
-  - 開始前:
-      - 用 uv 建立 Python 虛擬環境: 01-uv與虛擬環境.md
-      - 課程準備：認識 AIoT 資料流: 02-課程準備.md
-  - USB 序列通訊:
-      - UART：讓 Python 與 ESP32 雙向通訊: 03-uart-python-esp32.md
-  - 資料處理:
-      - 將感測資料存成 CSV 並繪製趨勢圖: 04-python-感測資料視覺化.md
-  - I2C 顯示:
-      - I2C：使用 LCD1602A 顯示 DHT11 資料: 05-i2c-lcd.md
-  - 點陣顯示:
-      - 74HC595：辨識並驅動裸 8×8 點陣: 06-74hc595-8x8點陣.md
-  - 本機儀表板:
-      - Gradio：建立本機 AIoT 儀表板: 07-gradio-aiot儀表板.md
-  - 整合專題:
-      - 完成環境看板: 08-整合專題.md
+  - 主線課程:
+      - 開始前:
+          - 用 uv 建立 Python 虛擬環境: 01-uv與虛擬環境.md
+          - 課程準備：認識 AIoT 資料流: 02-課程準備.md
+      - USB 序列通訊:
+          - UART：讓 Python 與 ESP32 雙向通訊: 03-uart-python-esp32.md
+      - 資料處理:
+          - 將感測資料存成 CSV 並繪製趨勢圖: 04-python-感測資料視覺化.md
+      - I2C 顯示:
+          - I2C：使用 LCD1602A 顯示 DHT11 資料: 05-i2c-lcd.md
+      - 點陣顯示:
+          - 74HC595：辨識並驅動裸 8×8 點陣: 06-74hc595-8x8點陣.md
+      - 本機儀表板:
+          - Gradio：建立本機 AIoT 儀表板: 07-gradio-aiot儀表板.md
+      - 整合專題:
+          - 完成環境看板: 08-整合專題.md
