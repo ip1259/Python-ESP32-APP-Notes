@@ -80,12 +80,13 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 
 ### 手機 App 與無線控制
 
+- [資訊補充：常見 GUI 與 App 解決方案](資訊補充-Python後端GUI與App解決方案.md)
 - [即將推出：選做實作｜既有 BLE App 測試](選做-既有BLE-App測試.md)
 - [即將推出：選做實作｜ESP32 STA／HTTP 與 MIT App Inventor](選做-ESP32-STA-HTTP與MIT-App-Inventor.md)
-- [選做實作：Gradio Share 手機瀏覽器操作整合儀表板](選做-Gradio-Share手機控制ESP32.md)
 
 ### 整合專題
 
 - [整合專題：完成環境看板](08-整合專題.md)
 - [延伸選讀：環境看板整合程式導讀](附錄-整合專題-環境看板程式導讀.md)
 - [延伸選讀：整合專題故障分流](附錄-故障排除索引.md)
+- [選做實作：Gradio Share 手機瀏覽器操作整合儀表板](選做-Gradio-Share手機控制ESP32.md)
