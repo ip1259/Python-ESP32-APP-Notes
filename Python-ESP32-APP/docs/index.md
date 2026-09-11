@@ -54,7 +54,8 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 - [延伸選讀：datetime 與 time](附錄-datetime與time.md)
 - [延伸選讀：函式、類別與責任分工](附錄-函式類別與責任分工.md)
 - [延伸選讀：例外處理與錯誤訊息](附錄-例外處理與錯誤訊息.md)
-- [即將推出：logging 與除錯紀錄](附錄-logging與除錯紀錄.md)
+- [延伸選讀：logging 與除錯紀錄](附錄-logging與除錯紀錄.md)
+- [延伸選讀：進階 logger 技巧與設計方法](附錄-進階logger技巧與設計方法.md)
 - [即將推出：pytest 最小測試](附錄-pytest最小測試.md)
 
 ### I2C 顯示
