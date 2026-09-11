@@ -51,7 +51,7 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 
 - [延伸選讀：pathlib 與檔案路徑](附錄-pathlib與檔案路徑.md)
 - [延伸選讀：json 與 csv](附錄-json與csv.md)
-- [即將推出：datetime 與 time](附錄-datetime與time.md)
+- [延伸選讀：datetime 與 time](附錄-datetime與time.md)
 - [即將推出：函式、類別與責任分工](附錄-函式類別與責任分工.md)
 - [即將推出：例外處理與錯誤訊息](附錄-例外處理與錯誤訊息.md)
 - [即將推出：logging 與除錯紀錄](附錄-logging與除錯紀錄.md)

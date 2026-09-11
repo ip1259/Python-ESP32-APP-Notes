@@ -271,4 +271,4 @@ writer = csv.DictWriter(
 
 ## 下一步
 
-回到[UART：讓 Python 與 ESP32 雙向通訊](03-uart-python-esp32.md)確認 JSON 從哪裡來，再回到[將感測資料存成 CSV 並繪製趨勢圖](04-python-感測資料視覺化.md)查看 CSV 如何用於圖表。接下來可閱讀「即將推出：datetime 與 time」，認識感測資料的時間資訊。
+回到[UART：讓 Python 與 ESP32 雙向通訊](03-uart-python-esp32.md)確認 JSON 從哪裡來，再回到[將感測資料存成 CSV 並繪製趨勢圖](04-python-感測資料視覺化.md)查看 CSV 如何用於圖表。接下來可閱讀[延伸選讀：datetime 與 time](附錄-datetime與time.md)，認識感測資料的時間資訊。
