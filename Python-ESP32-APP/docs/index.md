@@ -34,7 +34,7 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 - [延伸選讀：UART JSON、緩衝區與請求／回應](附錄-UART-JSON緩衝區與請求回應.md)
 - [延伸選讀：UART 程式導讀](附錄-UART程式導讀.md)
 - [延伸選讀：pyserial 連線、讀寫與逾時](附錄-pyserial連線讀寫與逾時.md)
-- [即將推出：pyserial 埠與資料除錯](附錄-pyserial埠與資料除錯.md)
+- [延伸選讀：pyserial 埠與資料除錯](附錄-pyserial埠與資料除錯.md)
 - [即將推出：pyserial 連線生命週期與 COM 埠除錯](附錄-pyserial連線生命週期與COM埠除錯.md)
 
 ### 資料處理

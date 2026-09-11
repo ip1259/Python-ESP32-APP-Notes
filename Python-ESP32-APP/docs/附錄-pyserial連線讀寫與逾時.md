@@ -154,4 +154,4 @@ print(ser.is_open)
 
 ## 下一步
 
-回到[UART：讓 Python 與 ESP32 雙向通訊](03-uart-python-esp32.md)，在實機前先確認序列監控已關閉。下一篇將介紹「即將推出：pyserial 埠與資料除錯」。
+回到[UART：讓 Python 與 ESP32 雙向通訊](03-uart-python-esp32.md)，在實機前先確認序列監控已關閉。接著可閱讀[延伸選讀：pyserial 埠與資料除錯](附錄-pyserial埠與資料除錯.md)，判斷候選埠、鮑率與解碼問題。
