@@ -185,4 +185,4 @@ file_handler = RotatingFileHandler(
 
 ## 下一步
 
-回到[延伸選讀：logging 與除錯紀錄](附錄-logging與除錯紀錄.md)，依你的程式規模選擇基礎或進階設計。主線順序接著可閱讀「即將推出：pyserial 連線、讀寫與逾時」。
+回到[延伸選讀：logging 與除錯紀錄](附錄-logging與除錯紀錄.md)，依你的程式規模選擇基礎或進階設計。主線順序接著可閱讀[延伸選讀：pyserial 連線、讀寫與逾時](附錄-pyserial連線讀寫與逾時.md)。
