@@ -73,7 +73,7 @@ nav:
   - 本機儀表板:
       - Gradio：建立本機 AIoT 儀表板: 07-gradio-aiot儀表板.md
       - 延伸選讀：Gradio 事件、狀態與原型邊界: 附錄-Gradio事件狀態與原型邊界.md
-      - 即將推出：Gradio 元件與事件: 附錄-Gradio元件與事件.md
+      - 延伸選讀：Gradio 元件與事件: 附錄-Gradio元件與事件.md
       - 即將推出：Gradio 狀態、驗證與使用體驗: 附錄-Gradio狀態驗證與使用體驗.md
       - 即將推出：選做實作｜ngrok、WebSocket 與公開服務: 選做-ngrok-WebSocket與公開服務.md
   - 手機 App 與無線控制:
