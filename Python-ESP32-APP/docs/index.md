@@ -75,8 +75,9 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 
 - [Gradio：建立本機 AIoT 儀表板](07-gradio-aiot儀表板.md)
 - [延伸選讀：Gradio 事件、狀態與原型邊界](附錄-Gradio事件狀態與原型邊界.md)
-- [延伸選讀：Gradio 元件與事件](附錄-Gradio元件與事件.md)
-- [即將推出：Gradio 狀態、驗證與使用體驗](附錄-Gradio狀態驗證與使用體驗.md)
+- [延伸選讀：Gradio 介面、元件與版面](附錄-Gradio元件與事件.md)
+- [延伸選讀：Gradio 事件、資料流與元件更新](附錄-Gradio事件資料流與元件更新.md)
+- [延伸選讀：Gradio 狀態、驗證與使用體驗](附錄-Gradio狀態驗證與使用體驗.md)
 - [即將推出：選做實作｜ngrok、WebSocket 與公開服務](選做-ngrok-WebSocket與公開服務.md)
 
 ### 手機 App 與無線控制
