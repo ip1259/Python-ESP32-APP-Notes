@@ -27,6 +27,16 @@ WARNING | sensor_reader | 溫度接近上限：79.5°C
 
 開啟 `outputs/advanced_logging.log` 時，另外能看到一筆 `DEBUG`。這表示不同 Handler 可以各自決定要保留多少細節。
 
+## 核心功能速覽
+
+### `logging.getLogger()` 與 `setLevel()`：取得並設定命名 logger
+
+`getLogger("sensor_reader")` 傳入名稱、回傳同名 logger；`setLevel(logging.DEBUG)` 設定它願意處理的最低等級。模組通常使用 `getLogger(__name__)`，但 Handler 應由應用程式入口集中設定。
+
+### Handler、`propagate` 與 `RotatingFileHandler()`：決定送到哪裡
+
+Handler 接收事件並輸出；`setLevel()` 決定各輸出位置的門檻。`propagate=False` 會阻止事件再交給 root logger，避免重複輸出。`RotatingFileHandler(path, maxBytes, backupCount)` 會建立檔案 Handler，超過大小時輪替並淘汰最舊備份，只能用於可重建的 log。
+
 ## 讓程式入口統一設定 logger
 
 目的：由應用程式入口決定 log 寫去哪裡；讀取感測資料的函式只負責記錄自己的事件。

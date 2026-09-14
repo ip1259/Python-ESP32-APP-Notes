@@ -29,6 +29,16 @@ timestamp,temperature_c,humidity_pct
 
 終端機會顯示第一筆時間和 `CSV 資料列數：2`。
 
+## 核心功能速覽
+
+### `json.loads()`、`dumps()`、`load()` 與 `dump()`：JSON 字串與檔案互轉
+
+`loads(json_text)` 傳入 JSON 文字、回傳 Python 字典或串列；`dumps(data)` 傳入 Python 資料、回傳 JSON 文字。`load(file)` 與 `dump(data, file)` 分別讀取與寫入已開啟的 JSON 檔；寫入同名檔可能覆寫內容。
+
+### `csv.DictReader` 與 `csv.DictWriter`：以欄位名稱讀寫表格
+
+`DictReader(file)` 讀取已開啟 CSV、逐列提供字典；`DictWriter(file, fieldnames=...)` 建立寫入器，欄位清單決定表頭與順序。它們不會自動修正缺欄或額外欄位，需先確認資料格式。
+
 ## 先把 JSON 文字變成字典
 
 JSON（JavaScript Object Notation，JavaScript 物件表示法）常用來傳送有欄位名稱的資料。從 UART 讀到的 JSON 一開始是文字；`json.loads()` 才能把它轉為可依欄位名稱取值的字典。

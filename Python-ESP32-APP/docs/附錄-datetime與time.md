@@ -25,6 +25,16 @@
 已經逾時：True
 ```
 
+## 核心功能速覽
+
+### `datetime.now()`、`strftime()` 與 `strptime()`：建立、格式化與解析時間
+
+`datetime.now()` 不需傳入值、回傳目前時間物件；`strftime(format)` 傳入格式碼、回傳文字；`datetime.strptime(text, format)` 傳入文字與格式碼、回傳時間物件，格式不一致會發生 `ValueError`。
+
+### `time.monotonic()`：計算經過時間
+
+不需傳入值，回傳持續遞增的秒數浮點值，適合和先前讀值相減判斷逾時。它不是可讀日曆時間，不能用來顯示日期。
+
 ## 建立與格式化時間
 
 ### 1. 建立可讀的時間戳記

@@ -48,8 +48,8 @@ nav:
       - 將感測資料存成 CSV 並繪製趨勢圖: 04-python-感測資料視覺化.md
       - 延伸選讀：CSV 與圖表程式導讀: 附錄-CSV與圖表程式導讀.md
       - 延伸選讀：感測資料品質: 附錄-感測資料品質.md
-      - 即將推出：Pandas 基礎操作: 附錄-Pandas基礎操作.md
-      - 即將推出：Pandas 清理、篩選與彙整: 附錄-Pandas清理篩選與彙整.md
+      - 延伸選讀：Pandas 基礎操作: 附錄-Pandas基礎操作.md
+      - 延伸選讀：Pandas 清理、篩選與彙整: 附錄-Pandas清理篩選與彙整.md
       - 即將推出：Matplotlib 圖表基本元件: 附錄-Matplotlib圖表基本元件.md
       - 即將推出：Matplotlib 可讀性與輸出: 附錄-Matplotlib可讀性與輸出.md
   - Python 程式設計:

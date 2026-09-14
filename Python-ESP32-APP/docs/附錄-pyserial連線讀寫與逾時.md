@@ -29,6 +29,16 @@
 
 這些結果來自受控 `loop://`，用來確認 API 行為；不是 ESP32 的實機驗收結果。
 
+## 核心功能速覽
+
+### `serial.serial_for_url()`：建立可測試的序列連線
+
+傳入網址字串（本頁為 `"loop://"`）及 `timeout`、`baudrate` 等設定，回傳可讀寫的序列連線物件。`loop://` 只把寫入 bytes 回送本身，不是 ESP32；真實連線才改用經確認的 COM 埠。
+
+### `write()`、`readline()` 與 `reset_input_buffer()`：收發與緩衝
+
+`write(bytes)` 傳入 bytes，回傳實際寫入的位元組數；`readline()` 回傳一行 bytes，逾時則回傳 `b""`。`reset_input_buffer()` 不回傳資料，效果是丟棄尚未讀取的輸入；只有明確知道資料可捨棄時才可使用。
+
 ## 建立受控連線並讀回一行
 
 目的：先在沒有硬體的情況下，確認「寫入 bytes → 讀回一行」的資料方向。

@@ -28,6 +28,16 @@ ERROR | 本次資料沒有可用的溫度，略過寫入。
 
 每行前方還會有執行時間。三個等級表示的不是「程式一定壞掉」：`INFO` 是正常歷程，`WARNING` 是可安全繼續但需注意，`ERROR` 是本次功能無法完成。
 
+## 核心功能速覽
+
+### `logging.basicConfig()`：設定預設輸出規則
+
+常見傳入 `level`、`format` 與 `handlers`，設定 root logger 的輸出位置與最低等級；它不回傳 log 資料。`FileHandler(..., mode="w")` 會重建同名檔，只能用於可重建的練習 log。
+
+### `logging.info()`、`warning()`、`error()`：記錄不同程度事件
+
+傳入訊息及可選格式參數，效果是交給符合門檻的 Handler 輸出。它們不取代 `try`／`except`：記錄事件不表示資料已被安全處理。
+
 ## 先建立受控的 log 檔
 
 目的：同時在終端機和檔案留下可回看的紀錄。
