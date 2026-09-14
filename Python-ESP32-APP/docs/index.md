@@ -69,6 +69,10 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 - [延伸選讀：74HC595 與裸 8×8 點陣掃描導讀](附錄-74HC595與8x8點陣掃描導讀.md)
 - [即將推出：選做實作｜MAX7219 點陣模組](選做-MAX7219點陣模組.md)
 
+### RFID 與 SPI
+
+- [即將推出：選做實作｜RC522 RFID 與 SPI](選做-RC522-RFID與SPI.md)
+
 ### 本機儀表板
 
 - [Gradio：建立本機 AIoT 儀表板](07-gradio-aiot儀表板.md)
