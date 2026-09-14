@@ -102,4 +102,4 @@ with serial.serial_for_url("loop://", baudrate=expected_baud_rate, timeout=0.1) 
 
 ## 下一步
 
-回到[UART：讓 Python 與 ESP32 雙向通訊](03-uart-python-esp32.md)完成實機確認。下一篇將介紹「即將推出：Pandas 基礎操作」。
+回到[UART：讓 Python 與 ESP32 雙向通訊](03-uart-python-esp32.md)完成實機確認。若想理解 Python 如何開啟、等待與關閉已確認的埠，可閱讀[延伸選讀：pyserial 連線生命週期與 COM 埠除錯](附錄-pyserial連線生命週期與COM埠除錯.md)；這不是主線驗收的額外步驟。
