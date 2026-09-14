@@ -146,4 +146,4 @@ uv run --with gradio python gradio_state_validation.py
 
 ## 下一步
 
-閱讀[延伸選讀：pytest 最小測試](附錄-pytest最小測試.md)，學習把這類純 Python 判斷函式寫成可重複執行的自動化測試。
+閱讀[延伸選讀：測試概念與 pytest 實作](附錄-測試概念與pytest實作.md)，學習把這類純 Python 判斷函式寫成可重複執行的自動化測試。

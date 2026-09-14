@@ -60,7 +60,7 @@ nav:
       - 延伸選讀：例外處理與錯誤訊息: 附錄-例外處理與錯誤訊息.md
       - 延伸選讀：logging 與除錯紀錄: 附錄-logging與除錯紀錄.md
       - 延伸選讀：進階 logger 技巧與設計方法: 附錄-進階logger技巧與設計方法.md
-      - 即將推出：pytest 最小測試: 附錄-pytest最小測試.md
+      - 延伸選讀：測試概念與 pytest 實作: 附錄-測試概念與pytest實作.md
   - I2C 顯示:
       - I2C：使用 LCD1602A 顯示 DHT11 資料: 05-i2c-lcd.md
       - 延伸選讀：LCD 顯示程式導讀: 附錄-LCD程式導讀.md
