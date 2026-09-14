@@ -44,8 +44,8 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 - [延伸選讀：感測資料品質](附錄-感測資料品質.md)
 - [延伸選讀：Pandas 基礎操作](附錄-Pandas基礎操作.md)
 - [延伸選讀：Pandas 清理、篩選與彙整](附錄-Pandas清理篩選與彙整.md)
-- [即將推出：Matplotlib 圖表基本元件](附錄-Matplotlib圖表基本元件.md)
-- [即將推出：Matplotlib 可讀性與輸出](附錄-Matplotlib可讀性與輸出.md)
+- [延伸選讀：Matplotlib 圖表基本元件](附錄-Matplotlib圖表基本元件.md)
+- [延伸選讀：Matplotlib 可讀性與輸出](附錄-Matplotlib可讀性與輸出.md)
 
 ### Python 程式設計
 
