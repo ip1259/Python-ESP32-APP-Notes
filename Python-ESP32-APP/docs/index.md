@@ -75,9 +75,14 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 
 ## 選做專題：RFID 門禁系統
 
+- [即將推出：專題第 0 章｜準備、安全與資料契約](選做-RFID專題準備安全與資料契約.md)
 - [即將推出：專題第 1 章｜RC522 RFID 與 SPI](選做-RC522-RFID與SPI.md)
-- [即將推出：專題第 5 章｜MIT App Inventor 與 HTTP](選做-ESP32-STA-HTTP與MIT-App-Inventor.md)
-- [即將推出：專題第 5 章｜ngrok、WebSocket 與公開服務](選做-ngrok-WebSocket與公開服務.md)
+- [即將推出：專題第 2 章｜ESP32 MQTT 雙向訊息](選做-ESP32-MQTT雙向訊息.md)
+- [即將推出：專題第 3 章｜Python MQTT Gateway 與 FastAPI 初步概念](選做-Python-MQTT-Gateway與FastAPI.md)
+- [即將推出：專題第 4 章｜LCD 狀態顯示](選做-LCD狀態顯示.md)
+- [即將推出：專題第 5 章｜MIT App Inventor、ngrok 與手機無線控制](選做-MIT-App-Inventor-ngrok與手機無線控制.md)
+- [即將推出：專題第 6 章｜端對端故障分流](選做-端對端故障分流.md)
+- [即將推出：專題第 7 章｜真實門控系統的安全總結](選做-真實門控系統安全總結.md)
 
 ## 其他選做實作
 
