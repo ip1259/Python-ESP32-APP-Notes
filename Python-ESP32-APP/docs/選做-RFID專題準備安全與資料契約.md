@@ -334,4 +334,4 @@ uv run python check_contract.py
 
 ## 下一步
 
-若想先了解讀卡硬體在專題中的位置，可閱讀[即將推出：選做專題第 1 章：RC522 RFID 與 SPI](選做-RC522-RFID與SPI.md)。該頁目前是方向介紹，不包含可操作的接線或程式。
+接著閱讀[專題第 1 章：RC522 RFID 與 SPI](選做-RC522-RFID與SPI.md)，以已授權練習卡確認 RC522 的受控讀卡流程。
