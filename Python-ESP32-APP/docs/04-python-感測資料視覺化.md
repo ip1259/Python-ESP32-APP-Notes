@@ -243,7 +243,7 @@ uv run python plot_sensor_data.py
 預期結果：出現溫度與濕度兩張折線圖，並建立 `charts/temperature_humidity.png`。
 
 !!! note "為什麼圖表文字使用英文？"
-    Windows 電腦的 Matplotlib 中文字型設定可能不同。這份核心範例使用英文標題與軸標籤，確保每台電腦都能先成功產圖；熟悉後可再依教師提供的字型設定改為中文。
+    Windows 電腦的 Matplotlib 中文字型設定可能不同。這份核心範例使用英文標題與軸標籤，確保每台電腦都能先成功產圖；熟悉後可依 [Matplotlib 字型設定文件](https://matplotlib.org/stable/users/explain/text/text_props.html) 與你的電腦已安裝字型改為中文。
 
 ## 如何判讀結果
 

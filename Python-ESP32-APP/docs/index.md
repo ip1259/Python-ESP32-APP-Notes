@@ -3,7 +3,7 @@
 這是一套以筆記方式編寫的 AIoT 實作教材。你會使用 ESP32 蒐集感測資料，再用 Python 進行資料處理、視覺化與 Gradio 儀表板展示。
 
 !!! info "閱讀方式"
-    本網站目前列出的第 1 至第 8 節是**主線課程**；標示為**延伸選讀**的內容用來深入理解該主題，不影響主線完成。標示為**即將推出**的頁面是教材預告，內容仍在整理與驗證中。
+    第 1 至第 8 節是**主線課程**；「延伸選讀」用來深入理解已完成的主線；「選做專題」與「其他選做實作」需要額外條件，不影響主線完成。標示「即將推出」的頁面仍在整理與驗證，尚未提供可操作內容。
 
 ## 開始前
 
@@ -13,84 +13,77 @@
 
 ## 課程成果
 
-完成課程後，你將能完成下列資料流：
+完成主線課程後，你將能完成下列資料流：
 
 ```text
 DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 ```
 
-每個主題先閱讀主線課程；想深入理解時，再閱讀同一主題下標示為「延伸選讀」的內容。你也可以先瀏覽「即將推出」頁面，了解後續教材的完整架構。
+先依序完成主線八節；想理解程式、除錯或套件用法時，再從延伸選讀找對應主題。想嘗試額外硬體、手機或網路整合時，請先閱讀選做頁面的條件與風險說明。
 
-## 課程主題
+## 主線課程
 
-### 開始前
+1. [01｜用 uv 建立 Python 虛擬環境](01-uv與虛擬環境.md)
+2. [02｜課程準備：認識 AIoT 資料流](02-課程準備.md)
+3. [03｜UART：讓 Python 與 ESP32 雙向通訊](03-uart-python-esp32.md)
+4. [04｜將感測資料存成 CSV 並繪製趨勢圖](04-python-感測資料視覺化.md)
+5. [05｜I2C：使用 LCD1602A 顯示 DHT11 資料](05-i2c-lcd.md)
+6. [06｜74HC595：辨識並驅動裸 8×8 點陣](06-74hc595-8x8點陣.md)
+7. [07｜Gradio：建立本機 AIoT 儀表板](07-gradio-aiot儀表板.md)
+8. [08｜整合專題：完成環境看板](08-整合專題.md)
 
-- [用 uv 建立 Python 虛擬環境](01-uv與虛擬環境.md)
-- [課程準備：認識 AIoT 資料流](02-課程準備.md)
-
-### USB 序列通訊
-
-- [UART：讓 Python 與 ESP32 雙向通訊](03-uart-python-esp32.md)
-- [延伸選讀：UART JSON、緩衝區與請求／回應](附錄-UART-JSON緩衝區與請求回應.md)
-- [延伸選讀：UART 程式導讀](附錄-UART程式導讀.md)
-- [延伸選讀：pyserial 連線、讀寫與逾時](附錄-pyserial連線讀寫與逾時.md)
-- [延伸選讀：pyserial 埠與資料除錯](附錄-pyserial埠與資料除錯.md)
-- [延伸選讀：pyserial 連線生命週期與 COM 埠除錯](附錄-pyserial連線生命週期與COM埠除錯.md)
-
-### 資料處理
-
-- [將感測資料存成 CSV 並繪製趨勢圖](04-python-感測資料視覺化.md)
-- [延伸選讀：CSV 與圖表程式導讀](附錄-CSV與圖表程式導讀.md)
-- [延伸選讀：感測資料品質](附錄-感測資料品質.md)
-- [延伸選讀：Pandas 基礎操作](附錄-Pandas基礎操作.md)
-- [延伸選讀：Pandas 清理、篩選與彙整](附錄-Pandas清理篩選與彙整.md)
-- [延伸選讀：Matplotlib 圖表基本元件](附錄-Matplotlib圖表基本元件.md)
-- [延伸選讀：Matplotlib 可讀性與輸出](附錄-Matplotlib可讀性與輸出.md)
+## 延伸選讀
 
 ### Python 程式設計
 
-- [延伸選讀：pathlib 與檔案路徑](附錄-pathlib與檔案路徑.md)
-- [延伸選讀：json 與 csv](附錄-json與csv.md)
-- [延伸選讀：datetime 與 time](附錄-datetime與time.md)
-- [延伸選讀：函式、類別與責任分工](附錄-函式類別與責任分工.md)
-- [延伸選讀：例外處理與錯誤訊息](附錄-例外處理與錯誤訊息.md)
-- [延伸選讀：logging 與除錯紀錄](附錄-logging與除錯紀錄.md)
-- [延伸選讀：進階 logger 技巧與設計方法](附錄-進階logger技巧與設計方法.md)
-- [延伸選讀：測試概念與 pytest 實作](附錄-測試概念與pytest實作.md)
+- [pathlib 與檔案路徑](附錄-pathlib與檔案路徑.md)
+- [json 與 csv](附錄-json與csv.md)
+- [datetime 與 time](附錄-datetime與time.md)
+- [函式、類別與責任分工](附錄-函式類別與責任分工.md)
+- [例外處理與錯誤訊息](附錄-例外處理與錯誤訊息.md)
+- [logging 與除錯紀錄](附錄-logging與除錯紀錄.md)
+- [進階 logger 技巧與設計方法](附錄-進階logger技巧與設計方法.md)
+- [測試概念與 pytest 實作](附錄-測試概念與pytest實作.md)
 
-### I2C 顯示
+### 序列通訊與除錯
 
-- [I2C：使用 LCD1602A 顯示 DHT11 資料](05-i2c-lcd.md)
-- [延伸選讀：LCD 顯示程式導讀](附錄-LCD程式導讀.md)
+- [UART JSON、緩衝區與請求／回應](附錄-UART-JSON緩衝區與請求回應.md)
+- [UART 程式導讀](附錄-UART程式導讀.md)
+- [pyserial 連線、讀寫與逾時](附錄-pyserial連線讀寫與逾時.md)
+- [pyserial 埠與資料除錯](附錄-pyserial埠與資料除錯.md)
+- [pyserial 連線生命週期與 COM 埠除錯](附錄-pyserial連線生命週期與COM埠除錯.md)
 
-### 點陣顯示
+### 資料處理與圖表
 
-- [74HC595：辨識並驅動裸 8×8 點陣](06-74hc595-8x8點陣.md)
-- [延伸選讀：74HC595 與裸 8×8 點陣掃描導讀](附錄-74HC595與8x8點陣掃描導讀.md)
+- [CSV 與圖表程式導讀](附錄-CSV與圖表程式導讀.md)
+- [感測資料品質](附錄-感測資料品質.md)
+- [Pandas 基礎操作](附錄-Pandas基礎操作.md)
+- [Pandas 清理、篩選與彙整](附錄-Pandas清理篩選與彙整.md)
+- [Matplotlib 圖表基本元件](附錄-Matplotlib圖表基本元件.md)
+- [Matplotlib 可讀性與輸出](附錄-Matplotlib可讀性與輸出.md)
+
+### 硬體、Gradio 與整合專題
+
+- [LCD 顯示程式導讀](附錄-LCD程式導讀.md)
+- [74HC595 與裸 8×8 點陣掃描導讀](附錄-74HC595與8x8點陣掃描導讀.md)
+- [Gradio 事件、狀態與原型邊界](附錄-Gradio事件狀態與原型邊界.md)
+- [Gradio 介面、元件與版面](附錄-Gradio元件與事件.md)
+- [Gradio 事件、資料流與元件更新](附錄-Gradio事件資料流與元件更新.md)
+- [Gradio 狀態、驗證與使用體驗](附錄-Gradio狀態驗證與使用體驗.md)
+- [環境看板整合程式導讀](附錄-整合專題-環境看板程式導讀.md)
+- [整合專題故障分流](附錄-故障排除索引.md)
+
+## 選做專題：RFID 門禁系統
+
+- [即將推出：專題第 1 章｜RC522 RFID 與 SPI](選做-RC522-RFID與SPI.md)
+- [即將推出：專題第 5 章｜MIT App Inventor 與 HTTP](選做-ESP32-STA-HTTP與MIT-App-Inventor.md)
+- [即將推出：專題第 5 章｜ngrok、WebSocket 與公開服務](選做-ngrok-WebSocket與公開服務.md)
+
+## 其他選做實作
+
+- [即將推出：選做實作｜既有 BLE App 測試](選做-既有BLE-App測試.md)
 - [即將推出：選做實作｜MAX7219 點陣模組](選做-MAX7219點陣模組.md)
 
-### RFID 與 SPI
+## 資訊補充
 
-- [即將推出：選做實作｜RC522 RFID 與 SPI](選做-RC522-RFID與SPI.md)
-
-### 本機儀表板
-
-- [Gradio：建立本機 AIoT 儀表板](07-gradio-aiot儀表板.md)
-- [延伸選讀：Gradio 事件、狀態與原型邊界](附錄-Gradio事件狀態與原型邊界.md)
-- [延伸選讀：Gradio 介面、元件與版面](附錄-Gradio元件與事件.md)
-- [延伸選讀：Gradio 事件、資料流與元件更新](附錄-Gradio事件資料流與元件更新.md)
-- [延伸選讀：Gradio 狀態、驗證與使用體驗](附錄-Gradio狀態驗證與使用體驗.md)
-- [即將推出：選做實作｜ngrok、WebSocket 與公開服務](選做-ngrok-WebSocket與公開服務.md)
-
-### 手機 App 與無線控制
-
-- [資訊補充：常見 GUI 與 App 解決方案](資訊補充-Python後端GUI與App解決方案.md)
-- [即將推出：選做實作｜既有 BLE App 測試](選做-既有BLE-App測試.md)
-- [即將推出：選做實作｜ESP32 STA／HTTP 與 MIT App Inventor](選做-ESP32-STA-HTTP與MIT-App-Inventor.md)
-
-### 整合專題
-
-- [整合專題：完成環境看板](08-整合專題.md)
-- [延伸選讀：環境看板整合程式導讀](附錄-整合專題-環境看板程式導讀.md)
-- [延伸選讀：整合專題故障分流](附錄-故障排除索引.md)
-- [選做實作：Gradio Share 手機瀏覽器操作整合儀表板](選做-Gradio-Share手機控制ESP32.md)
+- [常見 GUI 與 App 解決方案](資訊補充-Python後端GUI與App解決方案.md)

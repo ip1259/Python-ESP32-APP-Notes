@@ -177,7 +177,7 @@ with csv_path.open("r", encoding="utf-8", newline="") as file:
         print(f"姓名：{row[0]}，分數：{row[1]}")
 ```
 
-預期結果：顯示 Ada 和 Ben 的姓名與分數。這個範例的 `write_text()` 會重建 `scores.csv`，請勿用在既有成績或資料檔。
+預期結果：顯示 Ada 和 Ben 的姓名與分數。這個範例的 `write_text()` 會重建 `scores.csv`，請勿用在既有的重要資料檔。
 
 ### `writerow()`、`writerows()` 與含逗號的文字
 

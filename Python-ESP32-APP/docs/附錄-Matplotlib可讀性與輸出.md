@@ -7,7 +7,7 @@
 - 使用 `plt.subplots(2, 1, sharex=True)` 建立上下兩個子圖。
 - 使用 `DateFormatter` 控制時間軸日期格式。
 - 使用 `tight_layout()` 減少標籤重疊。
-- 用 `savefig()` 輸出可分享、可驗收的 PNG。
+- 用 `savefig()` 輸出可分享的 PNG。
 
 ## 開始前
 
@@ -31,7 +31,7 @@ PNG 有上下兩張圖：上方是 Temperature (°C)，下方是 Humidity (%)；
 
 ### `tight_layout()` 與 `savefig()`：調整版面並輸出
 
-`fig.tight_layout()` 自動調整子圖間距，降低標題和標籤重疊的機會。`fig.savefig(path, dpi=150)` 輸出 PNG；`dpi` 越高檔案通常越大，150 適合課堂練習與一般報告。
+`fig.tight_layout()` 自動調整子圖間距，降低標題和標籤重疊的機會。`fig.savefig(path, dpi=150)` 輸出 PNG；`dpi` 越高檔案通常越大，150 適合一般練習與分享。
 
 ## 建立可讀的雙子圖
 
@@ -93,7 +93,7 @@ print(f"圖表已建立：{chart_path}")
 
 操作：將 `dpi=150` 改成 `dpi=100`，輸出成另一個檔名，例如 `matplotlib_readability_100dpi.png`。
 
-預期結果：新檔案通常較小；先核對檔名，避免覆寫原本的驗收圖。
+預期結果：新檔案通常較小；先核對檔名，避免覆寫原本輸出的圖。
 
 ## 完成時，應能確認
 

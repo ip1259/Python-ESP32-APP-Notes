@@ -128,7 +128,7 @@ print(f"圖表已建立：{chart_path}")
 
 - `plot()` 畫資料線，`label` 與 `legend()` 說明資料代表什麼。
 - 標題、軸標籤、單位與格線讓圖表可被正確判讀。
-- `savefig()` 輸出可驗收的 PNG，`close()` 適合重複產圖。
+- `savefig()` 輸出可分享的 PNG，`close()` 適合重複產圖。
 
 ## 下一步
 

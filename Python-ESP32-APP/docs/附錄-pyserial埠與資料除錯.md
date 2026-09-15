@@ -88,7 +88,7 @@ with serial.serial_for_url("loop://", baudrate=expected_baud_rate, timeout=0.1) 
 
 ### 清單沒有 ESP32
 
-先檢查 USB 線是否能傳資料、裝置是否上電，插拔後重新列出。不要改用隨機 COM 號碼；仍沒有變化時請告知教師或助教。
+先檢查 USB 線是否能傳資料、裝置是否上電，插拔後重新列出。不要改用隨機 COM 號碼；仍沒有變化時，開啟 Windows「裝置管理員」查看是否出現未知 USB 裝置或警告符號，並依開發板 USB 晶片的官方驅動說明處理。無法確認時先停止上傳或連線。
 
 ### 資料出現亂碼或 JSON 解析失敗
 
@@ -102,4 +102,4 @@ with serial.serial_for_url("loop://", baudrate=expected_baud_rate, timeout=0.1) 
 
 ## 下一步
 
-回到[UART：讓 Python 與 ESP32 雙向通訊](03-uart-python-esp32.md)完成實機確認。若想理解 Python 如何開啟、等待與關閉已確認的埠，可閱讀[延伸選讀：pyserial 連線生命週期與 COM 埠除錯](附錄-pyserial連線生命週期與COM埠除錯.md)；這不是主線驗收的額外步驟。
+回到[UART：讓 Python 與 ESP32 雙向通訊](03-uart-python-esp32.md)完成實機確認。若想理解 Python 如何開啟、等待與關閉已確認的埠，可閱讀[延伸選讀：pyserial 連線生命週期與 COM 埠除錯](附錄-pyserial連線生命週期與COM埠除錯.md)；這不是主線完成成果所需的額外步驟。
