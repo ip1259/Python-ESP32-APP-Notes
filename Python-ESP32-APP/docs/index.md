@@ -89,7 +89,8 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 
 - [專題第 0 章｜準備、安全與資料契約](選做-RFID專題準備安全與資料契約.md)
 - [專題第 1 章｜RC522 RFID 與 SPI](選做-RC522-RFID與SPI.md)
-- [專題第 2 章｜ESP32 MQTT 雙向訊息](選做-ESP32-MQTT雙向訊息.md)
+- [專題第 2 章｜ESP32 MQTT 雙向訊息](選做-RFID專題/第2章/index.md)
+  - [HiveMQ Cloud 免費測試設定示範](選做-RFID專題/第2章/hivemq-cloud-測試設定.md)
 - [即將推出：專題第 3 章｜Python MQTT Gateway 與 FastAPI 初步概念](選做-Python-MQTT-Gateway與FastAPI.md)
 - [即將推出：專題第 4 章｜LCD 狀態顯示](選做-LCD狀態顯示.md)
 - [即將推出：專題第 5 章｜MIT App Inventor、ngrok 與手機無線控制](選做-MIT-App-Inventor-ngrok與手機無線控制.md)
