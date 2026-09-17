@@ -56,7 +56,7 @@
 
 ![示意主機名稱與 TLS 連接埠](images/HiveMQ步驟/03-connection-details.png)
 
-預期結果：你的 `secrets.h` 有自己的 `MQTT_HOST` 與 `MQTT_PORT`，但沒有把它們貼到公開筆記、截圖或 Git。
+預期結果：你的 `secrets.h` 有自己的 `MQTT_HOST` 與 `MQTT_PORT`，***請不要***把它們貼到截圖或加入 Git 版本控制或任何可能公開的地方。
 
 ### 3. 建立限定 topic 的權限
 
