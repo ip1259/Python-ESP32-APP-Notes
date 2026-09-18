@@ -330,4 +330,4 @@ uv run python check_contract.py
 
 ## 下一步
 
-接著閱讀[專題第 1 章：RC522 RFID 與 SPI](../../選做-RC522-RFID與SPI.md)，以已授權練習卡確認 RC522 的受控讀卡流程。
+接著閱讀[專題第 1 章：RC522 RFID 與 SPI](../第1章/index.md)，以已授權練習卡確認 RC522 的受控讀卡流程。

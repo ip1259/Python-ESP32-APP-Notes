@@ -19,7 +19,7 @@
 
 你需要先完成：
 
-- [第 1 章：RC522 RFID 與 SPI](../../選做-RC522-RFID與SPI.md)
+- [第 1 章：RC522 RFID 與 SPI](../第1章/index.md)
 - ESP32 已能連上你自己的 Wi-Fi，且 Arduino IDE 可以燒錄程式。
 - HiveMQ Cloud 的 Serverless FREE 免費帳號與叢集（cluster）。
 - Arduino IDE 已安裝 `PubSubClient`，發布者為 Nick O'Leary，版本為 `2.8.0`。

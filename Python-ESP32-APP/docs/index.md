@@ -97,7 +97,8 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 
 - [專題第 0 章｜準備、安全與資料契約](選做-RFID專題/第0章/index.md)
   - [資訊補充：資料契約為何要先固定](選做-RFID專題/第0章/資料契約為何要先固定.md)
-- [專題第 1 章｜RC522 RFID 與 SPI](選做-RC522-RFID與SPI.md)
+- [專題第 1 章｜RC522 RFID 與 SPI](選做-RFID專題/第1章/index.md)
+  - [資訊補充：MFRC522 函式庫怎麼使用](選做-RFID專題/第1章/mfrc522函式庫介紹.md)
 - [專題第 2 章｜ESP32 MQTT 雙向訊息](選做-RFID專題/第2章/index.md)
   - [HiveMQ Cloud 免費測試設定示範](選做-RFID專題/第2章/hivemq-cloud-測試設定.md)
   - [ESP32 MQTT 程式導讀](選做-RFID專題/第2章/mqtt程式導讀.md)
