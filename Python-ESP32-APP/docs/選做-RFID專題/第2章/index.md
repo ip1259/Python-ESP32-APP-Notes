@@ -6,7 +6,7 @@
 
     本章需要可上網的 Wi-Fi、HiveMQ Cloud 免費帳號，以及可建立與刪除的測試帳密。程式為了降低初次實驗的憑證設定門檻，使用 `setInsecure()`；它仍會加密傳輸內容，但**不會驗證伺服器身分**。若連到偽造的伺服器，MQTT 帳密可能外洩。
 
-    因此只能在你可控制的網路中，傳送本章的固定假資料，並使用短期、可隨時刪除的測試帳密。不得傳送真實 RFID UID、個人資料、Wi-Fi 資訊、控制設備指令、出入權限或使用紀錄。完成測試後請刪除或重建帳密；這個做法不能用於真實門禁或正式部署。
+    因此只能在你可控制的網路中，傳送本章的固定假資料，並使用短期、可隨時刪除的測試帳密。不得傳送真實 RFID UID、個人資料、Wi-Fi 資訊、控制設備指令、出入權限或使用紀錄。完成測試後請刪除或重建帳密。
 
 ## 你會學到什麼
 
@@ -105,9 +105,10 @@ WiFiClientSecure secure_client;
 PubSubClient mqtt_client(secure_client);
 
 const char* DEVICE_ID = "esp32-a1";
+const char* TEST_EVENT_ID = "evt-001";
 const char* TEST_EVENT =
-  "{\"event_type\":\"card_read\",\"device_id\":\"esp32-a1\","
-  "\"card\":\"TEST-CARD-001\",\"event_id\":\"evt-001\","
+  "{\"event_type\":\"card_read\",\"card_id_masked\":\"CARD-****-42\","
+  "\"device_id\":\"esp32-a1\",\"event_id\":\"evt-001\","
   "\"occurred_at\":\"2026-09-16T10:00:00+08:00\"}";
 
 void connect_wifi() {
@@ -129,8 +130,9 @@ void on_message(char* topic, byte* payload, unsigned int length) {
     return;
   }
 
-  if (message.indexOf("\"event_id\":\"evt-001\"") >= 0 &&
-      message.indexOf("\"status\":\"accepted\"") >= 0) {
+  String expected_event = "\"event_id\":\"" + String(TEST_EVENT_ID) + "\"";
+  if (message.indexOf(expected_event) >= 0 &&
+      message.indexOf("\"status\"") >= 0) {
     Serial.println("已收到對應的測試回覆。");
     return;
   }
@@ -223,7 +225,7 @@ void loop() {
 4. 發布下列**完全相同、不加空白**的文字到同一個 topic：
 
    ```json
-   {"event_id":"evt-001","status":"accepted"}
+   {"event_id":"evt-001","status":"authorized"}
    ```
 
 !!! success "收到固定回覆"
@@ -265,7 +267,7 @@ not-json
 ## 完成時，應能確認
 
 - ESP32 與網站端使用不同測試帳密，卻能在同一個限定 topic 收到固定假資料。
-- ESP32 收到 `evt-001` 與 `accepted` 的固定回覆時，顯示成功訊息。
+- ESP32 收到 `evt-001` 與 `authorized` 的固定回覆時，顯示成功訊息。
 - 純文字或錯誤事件編號的訊息會被略過。
 - 刪除測試帳密後，ESP32 無法再登入；重建帳密後才可恢復測試。
 - 你知道本章的 `setInsecure()` 只適用短期假資料實驗，且已刪除不再使用的帳密。
@@ -286,7 +288,7 @@ not-json
 
 ### ESP32 顯示「不符合本次測試規則」
 
-回覆必須使用本章提供的單行文字：`{"event_id":"evt-001","status":"accepted"}`。目前程式只做固定字串比對，沒有處理不同欄位順序、空白或完整 JSON 格式檢查。
+回覆必須帶有目前 `TEST_EVENT_ID` 的值與 `status` 欄位；`status` 可以是 `authorized` 或 `unauthorized`。程式只做必要文字比對，沒有處理不同欄位順序、空白或完整 JSON 格式檢查。
 
 ### 為什麼測完還要刪除帳密？
 
@@ -303,4 +305,6 @@ not-json
 
 下一章將把 ESP32 送出的固定訊息交給 Python 接收與整理：
 
-- [即將推出：專題第 3 章｜Python MQTT Gateway 與 FastAPI 初步概念](../../選做-Python-MQTT-Gateway與FastAPI.md)
+- [ESP32 MQTT 程式導讀](mqtt程式導讀.md)
+- [PubSubClient 函式庫介紹](pubsubclient函式庫介紹.md)
+- [專題第 3 章｜Python MQTT Gateway 與 FastAPI 初步概念](../第3章/index.md)

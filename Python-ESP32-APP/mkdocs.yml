@@ -94,9 +94,14 @@ nav:
       - 專題第 2 章｜ESP32 MQTT 雙向訊息:
           - 選做-RFID專題/第2章/index.md
           - HiveMQ Cloud 免費測試設定示範: 選做-RFID專題/第2章/hivemq-cloud-測試設定.md
-      - 即將推出：專題第 3 章｜Python MQTT Gateway 與 FastAPI 初步概念: 選做-Python-MQTT-Gateway與FastAPI.md
+          - ESP32 MQTT 程式導讀: 選做-RFID專題/第2章/mqtt程式導讀.md
+          - PubSubClient 函式庫介紹: 選做-RFID專題/第2章/pubsubclient函式庫介紹.md
+      - 專題第 3 章｜Python MQTT Gateway 與 FastAPI 初步概念:
+          - 選做-RFID專題/第3章/index.md
+          - Gateway 程式導讀: 選做-RFID專題/第3章/gateway程式導讀.md
+          - FastAPI 概念介紹: 選做-RFID專題/第3章/fastapi概念介紹.md
       - 即將推出：專題第 4 章｜LCD 狀態顯示: 選做-LCD狀態顯示.md
-      - 即將推出：專題第 5 章｜MIT App Inventor、ngrok 與手機無線控制: 選做-MIT-App-Inventor-ngrok與手機無線控制.md
+      - 即將推出：專題第 5 章｜Thunkable、ngrok 與手機無線控制: 選做-MIT-App-Inventor-ngrok與手機無線控制.md
       - 即將推出：專題第 6 章｜端對端故障分流: 選做-端對端故障分流.md
       - 即將推出：專題第 7 章｜真實門控系統的安全總結: 選做-真實門控系統安全總結.md
   - 其他選做實作:
