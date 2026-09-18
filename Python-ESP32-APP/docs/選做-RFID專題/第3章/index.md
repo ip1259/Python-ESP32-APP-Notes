@@ -268,4 +268,4 @@ chcp 65001 | Out-Null
 
 ## 下一步
 
-想逐段理解程式責任，閱讀[Gateway 程式導讀](gateway程式導讀.md)；想先認識 API，閱讀[FastAPI 概念介紹](fastapi概念介紹.md)。接著閱讀[專題第 4 章：LCD 狀態顯示](../../選做-LCD狀態顯示.md)。
+想逐段理解程式責任，閱讀[Gateway 程式導讀](gateway程式導讀.md)；想先認識 API，閱讀[FastAPI 概念介紹](fastapi概念介紹.md)。接著閱讀[專題第 4 章：LCD 狀態顯示](../第4章/index.md)。
