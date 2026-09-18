@@ -1,282 +1,244 @@
 # 選做專題第 0 章：準備、安全與資料契約
 
-先用離線的虛構資料定義讀卡事件與安全狀態，讓後續章節不會把完整卡片識別值或控制指令帶進資料流。
+先建立整個 RFID 專題需要的工作區、安全界線與離線資料規則，再進入讀卡與訊息傳遞。
 
 ## 你會學到什麼
 
-- 說明資料契約（data contract，資料交換規則）如何讓不同程式使用相同欄位與狀態。
-- 用遮蔽的虛構識別值、事件代號與含時區時間建立一筆可接受事件。
-- 用 Python 純函式產生授權模擬、未授權與失敗狀態，且不連接硬體或網路。
-- 判斷啟動、資料過期與格式錯誤時，為何必須顯示未知或失敗，而不能沿用上一筆結果。
+- 用假 `uid_envelope` 表示卡片資料容器，不使用真實 UID。
+- 確認黑名單優先、白名單可通過、未註冊卡拒絕。
+- 確認同一張未註冊假卡、同一裝置、五分鐘內第 3 次會標示 `review_required`，但不自動加入黑名單。
+- 說出 ESP32、MQTT、Gateway、LCD 與 App 在後續章節各自負責什麼。
 
 ## 開始前
 
-- 本章是完成主線後的選做專題，不影響[整合專題：完成環境看板](../../08-整合專題.md)的核心成果。
-- 需要 Python 與 `uv`；本章只使用 Python 標準函式庫，不需 RC522、MQTT、Broker、App、網路或 LCD。
-- 請只使用本頁提供的虛構資料。不要輸入、保存、截圖或提交真實卡片 UID、帳密、token、內網位址或個人資料。
+- 需要 Python、`uv`、Arduino IDE、NodeMCU-32S、RC522 與 LCD1602A；本頁不進行接線或網路連線。
+- 所有字串都是假資料。不要輸入 UID、帳密、網址、token 或個人資料。
 
-!!! warning "本章不是門禁控制"
-    本章只模擬讀卡狀態管理與顯示文字。不連接繼電器、電磁鎖、馬達或其他實體設備，也不能用來判定真實身分或控制門鎖。
+!!! warning "這不是門禁控制"
+
+    本頁只產生練習用狀態，不能開門、控制繼電器或判定真實身分。
 
 ## 成功的樣子
 
-執行檢查程式後，終端機會顯示：
+執行後顯示 `7 個資料契約案例全部通過`。
 
-```text
-9 個資料契約案例全部通過
-```
+## 專題環境與資料流
 
-這 9 個案例包含等待事件、授權模擬、未授權模擬、讀卡失敗、裝置離線、訊息服務斷線、Gateway 停止、資料過期與格式錯誤。它只證明 Python 的固定規則符合預期，不證明 RC522、網路、Broker 或 App 已可使用。
-
-## 為什麼要先定資料契約
-
-把資料契約想成大家先約好一張表單要填哪些格子、每格怎麼填。讀卡端、Gateway 與畫面都照同一份規則處理資料，才不會因為猜錯意思而顯示錯誤結果。
-
-想了解日常例子與資料交換專案為何需要先固定規則，可閱讀[資訊補充：資料契約為何要先固定](資料契約為何要先固定.md)。
-
-## 資料規則速覽
-
-| 資料 | 固定規則 | 用意 |
-| --- | --- | --- |
-| `event_id` | 使用 `evt-001` 這類 3 至 20 字元的小寫英文字母、數字與連字號 | 關聯測試事件與結果；不使用卡片資料、帳密或位址。 |
-| `card_id_masked` | 只接受虛構格式 `CARD-****-NN`，例如 `CARD-****-42` | 不接收完整 UID，也不在程式中把完整 UID 轉為遮蔽值。 |
-| `device_id` | 使用 `demo-esp32-01` 這類非個資的教學代號 | 不使用私有 IP、MAC 位址或個人名稱。 |
-| `occurred_at`、`updated_at` | 使用含時區的 ISO 8601 時間，例如 `2026-09-15T09:00:00+08:00` | 時間可比較，也不混淆來源時區。 |
-| `authorized` | 只能是 `True`、`False` 或 `None` | `None` 表示目前無法可靠判斷，不是「否」。 |
-
-本章以 `CARD-****-42` 作為唯一虛構的教學白名單。這只是固定資料的程式判斷，不是身分驗證，也不是可用於真實門禁的白名單。
-
-## 狀態規則
-
-| 情境 | `status` | `authorized` | 顯示方向 |
-| --- | --- | --- | --- |
-| 剛啟動 | `waiting` | `None` | 等待教學事件 |
-| 授權練習卡 | `authorized` | `True` | 已讀取授權練習卡 |
-| 未授權練習卡 | `unauthorized` | `False` | 練習卡未在教學白名單 |
-| 讀卡失敗 | `read_failed` | `None` | 無法完成讀卡 |
-| 裝置離線 | `device_offline` | `None` | 裝置目前無回應 |
-| 訊息服務斷線 | `broker_disconnected` | `None` | 訊息服務未連線 |
-| Gateway 停止 | `gateway_stopped` | `None` | 狀態服務未執行 |
-| 最新資料超過 60 秒 | `unknown` | `None` | 目前狀態未知 |
-
-60 秒是本章用來測試「舊資料不可當成現在結果」的固定條件。真正使用裝置與訊息服務時，資料多久算過期，必須依實際傳輸與顯示行為另外決定。
-
-## 步驟 1：建立練習資料夾
-
-**目的：** 將本章程式放在可控制的資料夾中，不碰到既有專題檔案。
+先在自己可控制的位置建立專題工作區。後續章節的程式、秘密設定與練習紀錄都放在這裡；機敏資訊不應公開傳送、發布或分享給他人。
 
 執行位置：PowerShell／電腦
 
 ```powershell
-mkdir rfid-ch0-contract
-cd rfid-ch0-contract
+mkdir rfid-project
+cd rfid-project
+mkdir gateway secrets records
 ```
 
-預期結果：目前位置會進入新建立的 `rfid-ch0-contract` 資料夾。
+預期結果：目前資料夾內有 `gateway`、`secrets`、`records` 三個資料夾。`secrets` 只留在自己的電腦，未來放 Wi-Fi 或 MQTT 測試資料時不可上傳、截圖或分享。
 
-## 步驟 2：建立資料契約程式
+## 建立 Python 專題環境
 
-**目的：** 檢查事件格式，並把可接受事件轉成安全的狀態摘要。
+**目的：** 讓後續 Gateway、離線檢查與測試都使用 RFID 專題自己的 Python 環境，不和其他練習資料夾混在一起。
+
+保持在 `rfid-project` 資料夾後執行：
+
+執行位置：PowerShell／電腦
+
+```powershell
+uv init --bare --python 3.12
+uv venv
+```
+
+`uv init --bare --python 3.12` 會建立這個專題的 `pyproject.toml`，並固定使用 Python `3.12`；`uv venv` 會建立 `.venv` 虛擬環境資料夾。虛擬環境像專題專用的工具箱，後續 Gateway 需要的套件只安裝在這裡，不影響其他 Python 練習。
+
+預期結果：目前資料夾至少有下列內容：
+
+```text
+rfid-project/
+├── .venv/
+├── gateway/
+├── records/
+├── secrets/
+├── .python-version
+└── pyproject.toml
+```
+
+接著確認環境可用：
+
+執行位置：PowerShell／電腦
+
+```powershell
+uv run python --version
+```
+
+預期結果：顯示 `Python 3.12.x`，且不出現找不到 `uv` 或 Python 的錯誤。第 0 章不安裝 MQTT、FastAPI 或其他套件；等到 Gateway 章節才依實際需求以 `uv add` 加入。`uv add` 會更新 `pyproject.toml` 與 `uv.lock`，兩個檔案要和 Gateway 程式一起保留，讓其他電腦能建立相同套件版本。
+
+## Arduino 工具版本
+
+後續硬體章節使用相同的 Arduino IDE 專案條件。固定版本如下：
+
+| 元件 | 固定版本 | 使用章節 |
+| --- | --- | --- |
+| ESP32 開發板核心 | `esp32 by Espressif Systems 3.3.11` | 第 1 章起 |
+| `MFRC522`（GitHub Community） | `1.4.12` | 第 1 章起 |
+| `PubSubClient`（Nick O'Leary） | `2.8.0` | 第 2 章起 |
+| `LiquidCrystal I2C`（Frank de Brabander） | `1.1.2` | 第 4 章 |
+
+進入後續硬體章節時，請依上表與各章列出的開發板、接線與程式操作，不要自行以其他版本替換這些函式庫。
+
+```text
+練習卡 → RC522／ESP32 → MQTT → Gateway → MQTT → LCD
+                                      ↑
+                              App／ngrok HTTPS API
+```
+
+| 元件 | 後續責任 | 本章是否操作 |
+| --- | --- | --- |
+| ESP32／RC522 | 讀取受控練習卡並送出事件 | 否 |
+| MQTT | 傳遞 ESP32 與 Gateway 事件 | 否 |
+| Gateway | 判斷名單、保留最小紀錄、回覆狀態 | 只用離線假資料 |
+| LCD | 顯示固定狀態 | 否 |
+| App／ngrok | 管理名單、看紀錄與通知 | 否 |
+
+!!! danger "立即停止的情況"
+
+    不明來源卡片、真實 UID、帳密、公開網址、私有網路位址或任何門鎖／繼電器控制出現時，停止操作。本專題只處理受控練習資料與狀態顯示。
+
+## 資料規則
+
+| 資料 | 規則 |
+| --- | --- |
+| `event_id` | 每次事件的取件號碼；不可重複。 |
+| `device_id` | 假裝置代號；不同裝置分開計數。 |
+| `occurred_at` | 必須是含時區的時間。 |
+| `uid_envelope` | 只有 `key_id`、`nonce`、`ciphertext`、`tag` 四個假欄位。 |
+
+## 步驟 1：建立程式
+
+**目的：** 用固定資料驗證名單與計數規則。
 
 執行位置：Python／電腦
 檔案：`rfid_contract.py`
 
 ```python
-from datetime import datetime
-import re
+from collections import defaultdict, deque
+from datetime import datetime, timedelta
+
+# 同一張未註冊假卡的計數時間窗。
+WINDOW = timedelta(minutes=5)
 
 
-ALLOWED_EVENT_TYPES = {
-    "card_read",
-    "read_failed",
-    "device_offline",
-    "broker_disconnected",
-    "gateway_stopped",
-}
-ALLOWED_CARD_IDS = {"CARD-****-42"}
-EVENT_ID_PATTERN = re.compile(r"^[a-z0-9-]{3,20}$")
-CARD_ID_PATTERN = re.compile(r"^CARD-\*\*\*\*-\d{2}$")
-DEVICE_ID_PATTERN = re.compile(r"^[a-z][a-z0-9-]{2,19}$")
-STATUS_MESSAGES = {
-    "read_failed": "無法完成讀卡",
-    "device_offline": "裝置目前無回應",
-    "broker_disconnected": "訊息服務未連線",
-    "gateway_stopped": "狀態服務未執行",
-}
-
-
-def parse_time(value: object) -> datetime:
-    if not isinstance(value, str):
-        raise ValueError("時間必須是文字")
-
-    try:
-        parsed = datetime.fromisoformat(value)
-    except ValueError as error:
-        raise ValueError("時間格式無法使用") from error
-
-    if parsed.tzinfo is None:
+def decide(event: dict[str, object], black: set[str], white: set[str], seen: set[str], attempts: dict[tuple[str, str], deque[datetime]]) -> str:
+    # 先確認事件只有本章約定的必要欄位。
+    required = {"event_id", "device_id", "occurred_at", "uid_envelope"}
+    if set(event) != required or event["event_id"] in seen:
+        raise ValueError("事件資料無法使用")
+    envelope = event["uid_envelope"]
+    if not isinstance(envelope, dict) or set(envelope) != {"key_id", "nonce", "ciphertext", "tag"}:
+        raise ValueError("信封資料無法使用")
+    when = datetime.fromisoformat(str(event["occurred_at"]))
+    if when.tzinfo is None:
         raise ValueError("時間必須包含時區")
-    return parsed
+    # 假 ciphertext 只作為練習卡代號，沒有真實 UID。
+    card = str(envelope["ciphertext"])
+    seen.add(str(event["event_id"]))
+    # 黑名單先判斷，避免同時在白名單時得到相反結果。
+    if card in black:
+        return "blacklisted"
+    if card in white:
+        return "whitelisted"
+
+    # 未註冊卡以「裝置＋假卡代號」各自計數。
+    key = (str(event["device_id"]), card)
+    while attempts[key] and when - attempts[key][0] >= WINDOW:
+        attempts[key].popleft()
+    attempts[key].append(when)
+    return "review_required" if len(attempts[key]) >= 3 else "not_registered"
 
 
-def validate_event(event: dict[str, object]) -> dict[str, object]:
-    required = {"event_type", "card_id_masked", "device_id", "occurred_at", "event_id"}
-    if set(event) != required:
-        raise ValueError("欄位不完整或含有未定義欄位")
-
-    event_type = event["event_type"]
-    event_id = event["event_id"]
-    device_id = event["device_id"]
-    card_id = event["card_id_masked"]
-
-    if event_type not in ALLOWED_EVENT_TYPES:
-        raise ValueError("事件種類無法使用")
-    if not isinstance(event_id, str) or not EVENT_ID_PATTERN.fullmatch(event_id):
-        raise ValueError("事件代號無法使用")
-    if not isinstance(device_id, str) or not DEVICE_ID_PATTERN.fullmatch(device_id):
-        raise ValueError("裝置代號無法使用")
-    if event_type == "card_read":
-        if not isinstance(card_id, str) or not CARD_ID_PATTERN.fullmatch(card_id):
-            raise ValueError("遮蔽識別值無法使用")
-    elif card_id is not None:
-        raise ValueError("非讀卡事件不可帶識別值")
-
-    parse_time(event["occurred_at"])
-    return event
-
-
-def make_status(event: dict[str, object], updated_at: str) -> dict[str, object]:
-    checked = validate_event(event)
-    event_type = str(checked["event_type"])
-    card_id = checked["card_id_masked"]
-
-    if event_type == "card_read":
-        authorized = card_id in ALLOWED_CARD_IDS
-        return {
-            "event_id": checked["event_id"],
-            "status": "authorized" if authorized else "unauthorized",
-            "authorized": authorized,
-            "display_text": "已讀取授權練習卡" if authorized else "練習卡未在教學白名單",
-            "updated_at": updated_at,
-        }
-
-    return {
-        "event_id": checked["event_id"],
-        "status": event_type,
-        "authorized": None,
-        "display_text": STATUS_MESSAGES[event_type],
-        "updated_at": updated_at,
-    }
-
-
-def process_event(event: dict[str, object], updated_at: str) -> dict[str, object]:
-    try:
-        parse_time(updated_at)
-        return {"accepted": True, "status_data": make_status(event, updated_at)}
-    except ValueError:
-        return {
-            "accepted": False,
-            "reason_code": "invalid_event",
-            "display_text": "資料格式無法使用",
-        }
-
-
-def latest_status(
-    status_data: dict[str, object] | None,
-    now: str,
-    max_age_seconds: int = 60,
-) -> dict[str, object]:
-    current_time = parse_time(now)
-    if status_data is None:
-        return {
-            "event_id": None,
-            "status": "waiting",
-            "authorized": None,
-            "display_text": "等待教學事件",
-            "updated_at": now,
-        }
-
-    updated_at = parse_time(status_data["updated_at"])
-    if (current_time - updated_at).total_seconds() > max_age_seconds:
-        return {
-            "event_id": status_data["event_id"],
-            "status": "unknown",
-            "authorized": None,
-            "display_text": "目前狀態未知",
-            "updated_at": now,
-        }
-    return status_data
-```
-
-`validate_event()` 會檢查欄位、事件代號、裝置代號、遮蔽識別值與時間。`process_event()` 接住可預期的格式錯誤，只回傳固定的安全摘要，不把原始輸入或 Python 錯誤顯示出去。`latest_status()` 則將尚未收到事件或超過 60 秒的資料標記為未知。
-
-## 步驟 3：建立固定案例檢查程式
-
-**目的：** 用 9 個可重複的案例確認規則沒有把失敗或舊資料當成目前授權結果。
-
-執行位置：Python／電腦
-檔案：`check_contract.py`
-
-```python
-from rfid_contract import latest_status, process_event
-
-
-NOW = "2026-09-15T09:00:30+08:00"
-
-
-def event(event_type: str, card_id_masked: str | None, event_id: str) -> dict[str, object]:
-    return {
-        "event_type": event_type,
-        "card_id_masked": card_id_masked,
-        "device_id": "demo-esp32-01",
-        "occurred_at": "2026-09-15T09:00:00+08:00",
-        "event_id": event_id,
-    }
-
-
-def assert_status(result: dict[str, object], expected: str, authorized: bool | None) -> None:
-    assert result["accepted"] is True
-    status_data = result["status_data"]
-    assert isinstance(status_data, dict)
-    assert status_data["status"] == expected
-    assert status_data["authorized"] is authorized
+def event(number: int, minute: int) -> dict[str, object]:
+    # 產生固定時間與固定假信封，讓案例每次都可重複執行。
+    return {"event_id": f"evt-{number:03}", "device_id": "demo-esp32-01", "occurred_at": f"2030-01-01T08:{minute:02}:00+00:00", "uid_envelope": {"key_id": "test-key", "nonce": "fake-nonce", "ciphertext": "practice-allowed", "tag": "fake-tag"}}
 
 
 def main() -> None:
-    assert latest_status(None, NOW)["status"] == "waiting"
-    assert_status(process_event(event("card_read", "CARD-****-42", "evt-001"), NOW), "authorized", True)
-    assert_status(process_event(event("card_read", "CARD-****-99", "evt-002"), NOW), "unauthorized", False)
+    # 每次執行都從空白名單與計數器開始。
+    black: set[str] = set()
+    white: set[str] = set()
+    seen: set[str] = set()
+    attempts: dict[tuple[str, str], deque[datetime]] = defaultdict(deque)
 
-    for index, event_type in enumerate(
-        ["read_failed", "device_offline", "broker_disconnected", "gateway_stopped"],
-        start=3,
-    ):
-        assert_status(process_event(event(event_type, None, f"evt-00{index}"), NOW), event_type, None)
+    assert decide(event(1, 0), black, white, seen, attempts) == "not_registered"
+    assert decide(event(2, 2), black, white, seen, attempts) == "not_registered"
+    assert decide(event(3, 4), black, white, seen, attempts) == "review_required"
 
-    old_status = process_event(event("card_read", "CARD-****-42", "evt-007"), "2026-09-15T09:00:00+08:00")
-    assert old_status["accepted"] is True
-    stored = old_status["status_data"]
-    assert isinstance(stored, dict)
-    assert latest_status(stored, "2026-09-15T09:01:01+08:00")["status"] == "unknown"
+    # 加入黑名單後，同一筆假資料必須優先被拒絕。
+    black.add("practice-allowed")
+    assert decide(event(4, 6), black, white, seen, attempts) == "blacklisted"
 
-    invalid = process_event(event("card_read", "12345678", "evt-008"), NOW)
-    assert invalid == {
-        "accepted": False,
-        "reason_code": "invalid_event",
-        "display_text": "資料格式無法使用",
-    }
-    print("9 個資料契約案例全部通過")
+    # 移除黑名單後，白名單才可以讓假資料通過。
+    black.clear()
+    white.add("practice-allowed")
+    assert decide(event(5, 7), black, white, seen, attempts) == "whitelisted"
+
+    try:
+        decide(event(5, 8), black, white, seen, attempts)
+        raise AssertionError("重複事件不應通過")
+    except ValueError:
+        pass
+    print("7 個資料契約案例全部通過")
 
 
 if __name__ == "__main__":
     main()
 ```
 
-預期結果：儲存兩個檔案後，程式尚未開啟任何硬體或網路連線；所有輸入都在 `check_contract.py` 的固定字典中。
+預期結果：程式中只有假信封和假裝置代號，沒有 UID、帳密或網路設定。
 
-## 步驟 4：執行檢查
+## 步驟 2：建立固定案例檢查程式
 
-**目的：** 確認所有固定情境都符合資料契約。
+**目的：** 把每個可觀察結果放在另一個檔案，之後調整契約時能重複確認規則。
+
+執行位置：Python／電腦
+檔案：`check_contract.py`
+
+```python
+from collections import defaultdict, deque
+from datetime import datetime
+
+from rfid_contract import decide, event
+
+
+def main() -> None:
+    # 這個檔案只排列案例；實際判斷仍由 rfid_contract.py 負責。
+    black: set[str] = set()
+    white: set[str] = set()
+    seen: set[str] = set()
+    attempts: dict[tuple[str, str], deque[datetime]] = defaultdict(deque)
+
+    # 第 1、2、3 次未註冊，依序確認拒絕與待檢視結果。
+    assert decide(event(1, 0), black, white, seen, attempts) == "not_registered"
+    assert decide(event(2, 2), black, white, seen, attempts) == "not_registered"
+    assert decide(event(3, 4), black, white, seen, attempts) == "review_required"
+    assert black == set()
+
+    # 接著確認黑名單優先，再確認只剩白名單時可通過。
+    black.add("practice-allowed")
+    assert decide(event(4, 6), black, white, seen, attempts) == "blacklisted"
+
+    black.clear()
+    white.add("practice-allowed")
+    assert decide(event(5, 7), black, white, seen, attempts) == "whitelisted"
+    print("5 個資料契約案例全部通過")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+預期結果：兩個 Python 檔案都在 `rfid-project` 資料夾。`rfid_contract.py` 負責規則，`check_contract.py` 負責檢查結果。
+
+## 步驟 3：執行案例
 
 執行位置：PowerShell／電腦
 
@@ -284,50 +246,29 @@ if __name__ == "__main__":
 uv run python check_contract.py
 ```
 
-預期結果：顯示 `9 個資料契約案例全部通過`。若看到 `AssertionError`，先確認兩個檔案是否在同一資料夾，以及程式碼、固定時間和虛構值是否完整貼上。
-
-## 安全界線與目前尚未做的事
-
-!!! warning "資料與門控安全界線"
-
-    - `CARD-****-42` 與 `CARD-****-99` 都是虛構值；不要改成真實 UID。
-    - 本章的「授權」是固定練習資料的比對結果，不代表真實身分或門禁權限。
-    - MQTT topic、Broker、FastAPI、公開網址、手機 App、RC522 與 LCD 接線都不在本章範圍內。請不要自行加入帳密、網路設定、真實卡片資料或控制設備的程式。
-    - 若資料格式錯誤，程式只顯示「資料格式無法使用」。不要為了除錯把原始卡片資料、帳密或內網資訊印出來。
+預期結果：顯示 `5 個資料契約案例全部通過`。
 
 ## 完成時，應能確認
 
-- 能說出資料契約至少包含欄位、格式、狀態與錯誤處理規則。
-- 能執行 `uv run python check_contract.py`，並看到 9 個固定案例全部通過。
-- 能解釋 `True`、`False` 與 `None` 在 `authorized` 欄位中的差別。
-- 能指出資料超過 60 秒時為何要改為 `unknown`。
-- 能確認程式沒有讀取真實 UID、開啟網路、控制硬體或產生門鎖指令。
+- 第 3 次未註冊只會得到 `review_required`，不會自動改變黑名單。
+- 黑名單優先於白名單。
+- 重複事件被拒絕。
 
 ## 常見問題
 
-### 顯示 `ModuleNotFoundError: No module named 'rfid_contract'`
+### 出現 `AssertionError`
 
-確認檔名是 `rfid_contract.py`，不是 `rfid_contract.py.txt`；兩個 Python 檔案也必須在同一個 `rfid-ch0-contract` 資料夾，再從該資料夾執行指令。
+確認程式完整貼上，並保留固定時間與假信封。不要改成真實卡片資料。
 
-### 顯示「資料格式無法使用」或 `AssertionError`
+### 為什麼沒有讀卡器或 App？
 
-先檢查 `event_id` 是否像 `evt-001`，遮蔽值是否像 `CARD-****-42`，時間是否包含 `+08:00`。不要以真實卡片資料取代範例值。
-
-### 為什麼沒有看到 RC522、MQTT 或手機畫面？
-
-這是第 0 章的設計目的：先在離線環境確認資料規則。硬體、訊息服務與手機查詢需要額外設備、帳號或網路條件，不屬於這一頁的操作。
-
-### 為什麼舊的授權結果不能繼續顯示？
-
-舊結果只能說明先前的虛構事件，不代表現在仍可靠。超過 60 秒後，程式改為 `unknown`，避免把以前的 `True` 誤當成目前狀態。
+第 0 章先固定資料規則。讀卡、MQTT、Gateway、LCD 與 App 會在後續章節各自驗證。
 
 ## 重點整理
 
-- 資料契約先固定欄位、格式與狀態，後續不同程式才可安全交換必要資料。
-- 虛構遮蔽值、固定事件代號和含時區時間，能讓測試可重複且不含敏感資料。
-- `None`、`waiting` 與 `unknown` 都是在誠實表達「目前無法可靠判斷」。
-- 本章只驗證純 Python 規則；它不代表硬體、網路、Broker、Gateway 或 App 已完成。
+- 假信封只用來練習資料外形，不代表加密已完成。
+- 資料無法可靠判斷時，應拒絕或標示待檢視，不保留舊結果。
 
 ## 下一步
 
-接著閱讀[專題第 1 章：RC522 RFID 與 SPI](../第1章/index.md)，以已授權練習卡確認 RC522 的受控讀卡流程。
+接著閱讀[第 1 章：RC522 RFID 與 SPI](../第1章/index.md)。

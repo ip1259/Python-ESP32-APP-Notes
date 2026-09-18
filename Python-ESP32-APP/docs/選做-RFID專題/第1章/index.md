@@ -1,6 +1,6 @@
 # 專題第 1 章：RC522 RFID 與 SPI
 
-用已授權的練習卡確認 ESP32 可透過 SPI 讀到 RC522，但不顯示、保存或傳送完整 UID。
+從第 0 章建立的專題工作區開始，用已授權的練習卡確認 ESP32 可透過 SPI 讀到 RC522，但不顯示、保存或傳送完整 UID。
 
 ## 你會學到什麼
 
@@ -12,9 +12,19 @@
 ## 開始前
 
 - 本章是主線完成後才進行的選做專題；未進行本章，仍可完成[整合專題：完成環境看板](../../08-整合專題.md)。
+- 先完成[專題第 0 章：準備、安全與資料契約](../第0章/index.md)，並在其中建立的 `rfid-project` 資料夾內保存本章 Arduino 草稿。
 - 需要 NodeMCU-32S 相容 ESP32、RC522、杜邦線與本人或明確獲授權的練習卡。
 - 預設由 ESP32 開發板的 `3.3V` 腳位供應 RC522 電源。額外補充的麵包板電源模組只用於供電不足時的排查，不屬於主線材料，也不是本章的預設接線。
-- 本章使用 Arduino IDE 的 `MFRC522` 函式庫 `1.4.12`（GitHub Community）。請不要同時安裝或混用 `RFID_MFRC522v2`，兩者的程式寫法不同。
+
+請在 Arduino IDE 的「開發板管理員」與「程式庫管理員」確認下列版本，再開始接線與上傳。版本不同時，先調整為下表版本，不要混用範例。
+
+| 項目 | 固定版本／選項 | 用途 |
+| --- | --- | --- |
+| ESP32 開發板核心 | `esp32 by Espressif Systems 3.3.11` | 提供 NodeMCU-32S 的編譯與上傳工具。 |
+| 開發板 | `NodeMCU-32S` | 本章的 ESP32 相容開發板選項。 |
+| `MFRC522` | `1.4.12`（GitHub Community） | 讓 ESP32 透過 SPI 使用 RC522。 |
+
+請不要同時安裝或混用 `RFID_MFRC522v2` 的範例；兩者的程式寫法與設定不同。
 
 !!! warning "供電與 UID 安全限制"
 
@@ -43,6 +53,8 @@ SPI（Serial Peripheral Interface，序列周邊介面）讓 ESP32 和 RC522 用
 
 RC522 板上的 `SDA` 在這裡是 `SS`（片選），不是 I2C 的資料線；因此不接主線 LCD 使用的 `GPIO 21`。
 
+想先用日常例子弄懂這幾條線怎麼分工，可閱讀[資訊補充：SPI 怎麼讓 ESP32 和 RC522 合作](spi通訊介紹.md)。
+
 | RC522 腳位 | ESP32／電源腳位 | 用途／注意事項 |
 | --- | --- | --- |
 | `SDA`／`SS` | `GPIO 5` | SPI 片選；不是 I2C `SDA`。 |
@@ -59,7 +71,7 @@ RC522 板上的 `SDA` 在這裡是 `SS`（片選），不是 I2C 的資料線；
 預設由 ESP32 的 `3V3` 與 `GND` 供應 RC522。不同 ESP32、RC522 或線材的供電情況可能不同；如果讀卡不穩、ESP32 重開或 USB 斷線，先拔除 USB，再使用下列例外排查方式。
 
 !!! warning "例外：供電不足時才使用外接電源"
-    本次硬體實測曾遇到 ESP32 板上 `3.3V` 供電不足；改用已確認設定為 `3.3V` 的麵包板電源模組後，RC522 可穩定讀卡。若要採用這個額外補充方式，外接模組只接 RC522 的 `3.3V`／`GND`，並以 GND 線讓外接電源模組、ESP32、RC522 三者共地。不得接 `5V`；電壓、接線或模組標示不明時，停止操作。
+    如果讀卡不穩、ESP32 重新啟動或 USB 斷線，可使用已確認設定為 `3.3V` 的麵包板電源模組排查。外接模組只接 RC522 的 `3.3V`／`GND`，並以 GND 線讓外接電源模組、ESP32、RC522 三者共地。不得接 `5V`；電壓、接線或模組標示不明時，停止操作。
 
 ![例外接線：外接電源只供應 RC522，且三者共地](../../images/rc522_external_power_wiring.svg)
 
@@ -76,9 +88,9 @@ RC522 板上的 `SDA` 在這裡是 `SS`（片選），不是 I2C 的資料線；
 
 **目的：** 讓 Arduino IDE 知道如何透過 SPI 和 RC522 溝通。
 
-在 Arduino IDE 開啟「程式庫管理員」，搜尋並安裝 `MFRC522` `1.4.12`，作者應顯示為 GitHub Community。
+在 Arduino IDE 開啟「程式庫管理員」，搜尋並安裝 `MFRC522` `1.4.12`，作者應顯示為 GitHub Community。接著開啟「開發板管理員」，確認 `esp32 by Espressif Systems` 是 `3.3.11`，並在「工具 > 開發板」選擇 `NodeMCU-32S`。
 
-預期結果：在「程式庫管理員」中可看到該函式庫已安裝。若只找到 `RFID_MFRC522v2`，先不要以它取代本章函式庫；它需要不同的驅動設定，並未在本章配置驗證。
+預期結果：在兩個管理員中都能看到上方版本表的項目；`NodeMCU-32S` 可在開發板選單中選取。若只找到 `RFID_MFRC522v2`，不要以它取代本章函式庫；它需要不同的驅動設定。
 
 想先知道這個函式庫在程式中如何接手 SPI 溝通、偵測卡片與結束本次讀取，可閱讀[資訊補充：MFRC522 函式庫怎麼使用](mfrc522函式庫介紹.md)。
 
@@ -95,7 +107,9 @@ RC522 板上的 `SDA` 在這裡是 `SS`（片選），不是 I2C 的資料線；
 **目的：** 只確認是否讀到已授權練習卡，不把卡片識別資料顯示出來。
 
 執行位置：Arduino IDE／ESP32
-檔案：`rc522_safe_card_read.ino`
+檔案：`rfid-project/esp32/rc522_safe_card_read/rc522_safe_card_read.ino`
+
+在第 0 章建立的 `rfid-project` 中，新增 `esp32/rc522_safe_card_read` 資料夾，再建立同名的 `rc522_safe_card_read.ino`。Arduino 草稿的資料夾名稱要和 `.ino` 檔名相同，Arduino IDE 才能正常開啟它。
 
 ```cpp
 #include <SPI.h>
@@ -104,10 +118,13 @@ RC522 板上的 `SDA` 在這裡是 `SS`（片選），不是 I2C 的資料線；
 constexpr byte SS_PIN = 5;
 constexpr byte RST_PIN = 22;
 
+// 建立 RC522 物件，並指定片選與重設腳位。
 MFRC522 rfid(SS_PIN, RST_PIN);
 
 void setup() {
   Serial.begin(115200);
+
+  // 先啟用 SPI，再初始化 RC522。
   SPI.begin();
   rfid.PCD_Init();
 
@@ -115,17 +132,21 @@ void setup() {
 }
 
 void loop() {
+  // 沒有新卡時直接回到迴圈開頭。
   if (!rfid.PICC_IsNewCardPresent()) {
     return;
   }
 
+  // 本次讀卡不成功時不取用任何卡片資料。
   if (!rfid.PICC_ReadCardSerial()) {
     Serial.println("讀卡失敗，請移開卡片後再試一次");
     return;
   }
 
+  // 只顯示固定狀態，不讀取或列印 UID。
   Serial.println("已讀到練習卡");
 
+  // 結束本次通訊，讓移開後再靠近的卡成為新事件。
   rfid.PICC_HaltA();
   rfid.PCD_StopCrypto1();
 
@@ -134,9 +155,9 @@ void loop() {
 }
 ```
 
-`SPI.begin()` 會啟用 ESP32 的 SPI 介面；本章使用接線表中的腳位。`MFRC522 rfid(SS_PIN, RST_PIN)` 建立 RC522 物件，傳入片選和重設腳位。`PCD_Init()` 初始化讀卡機；`PICC_IsNewCardPresent()` 回傳是否偵測到新卡；`PICC_ReadCardSerial()` 回傳是否成功讀取本次卡片。成功後，`PICC_HaltA()` 結束本次卡片通訊，`PCD_StopCrypto1()` 清理本次讀卡使用的通訊狀態。
+程式中的短註解標出初始化、等待新卡、讀卡失敗與收尾的位置。`SPI.begin()` 啟用 SPI，`PCD_Init()` 初始化讀卡機；讀卡成功後，`PICC_HaltA()` 與 `PCD_StopCrypto1()` 結束本次通訊。想了解函式庫的完整角色，可閱讀[資訊補充：MFRC522 函式庫怎麼使用](mfrc522函式庫介紹.md)。
 
-程式刻意不讀取或列印 `rfid.uid`。這樣能驗證硬體讀卡流程，又不會把卡片識別資料帶到序列監控、截圖或後續資料流。
+程式刻意不讀取或列印 `rfid.uid`。這樣能確認硬體讀卡流程，又不會把卡片識別資料帶到序列監控、截圖或後續資料流。
 
 上傳後開啟序列監控視窗，設定為 `115200`。
 
@@ -182,9 +203,9 @@ UID 是卡片識別資訊，完整記錄容易外流，而且不能可靠證明�
 
 - RC522 透過 SPI 和 ESP32 溝通；`SDA`／`SS` 是片選，不是 I2C 資料線。
 - RC522 預設由 ESP32 的 `3V3` 供電；讀卡不穩時，可用已確認的外接 `3.3V` 電源作例外排查，且必須和 ESP32 共地。
-- `MFRC522 1.4.12` 已在本章的 NodeMCU-32S 配置驗證，不混用 v2 函式庫。
+- 使用 `esp32 by Espressif Systems 3.3.11`、`NodeMCU-32S` 與 `MFRC522 1.4.12`，不混用 v2 函式庫。
 - 固定成功文字足以確認讀卡，不需要也不應該公開完整 UID。
 
 ## 下一步
 
-本章只確認 RC522 的受控讀卡流程。若要將固定假資料送到網路服務，請繼續閱讀[專題第 2 章｜ESP32 MQTT 雙向訊息](../第2章/index.md)。
+本章只確認 RC522 的受控讀卡流程。若要將練習信封送到網路服務，請繼續閱讀[專題第 2 章｜ESP32 MQTT 假信封事件](../第2章/index.md)。

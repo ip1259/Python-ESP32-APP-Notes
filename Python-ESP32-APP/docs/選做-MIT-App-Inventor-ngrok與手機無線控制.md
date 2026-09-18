@@ -18,4 +18,4 @@
 
 ## 下一步
 
-先完成[專題第 3 章：Python MQTT Gateway 與 FastAPI 初步概念](選做-RFID專題/第3章/index.md)，了解 App 預計讀取的最新狀態來自何處。
+先完成[專題第 3 章：Gateway 名單與最小紀錄](選做-RFID專題/第3章/index.md)，了解 App 讀取的最新狀態來自何處。
