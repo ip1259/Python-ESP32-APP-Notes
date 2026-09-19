@@ -121,3 +121,4 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 ## 資訊補充
 
 - [常見 GUI 與 App 解決方案](資訊補充-Python後端GUI與App解決方案.md)
+- [什麼是系統耦合性？](資訊補充-系統耦合性與替換彈性.md)
