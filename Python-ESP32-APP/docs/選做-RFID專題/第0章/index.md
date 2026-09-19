@@ -14,13 +14,13 @@
 - 需要 Python、`uv`、Arduino IDE、NodeMCU-32S、RC522 與 LCD1602A；本頁不進行接線或網路連線。
 - 所有字串都是假資料。不要輸入 UID、帳密、網址、token 或個人資料。
 
-!!! warning "這不是門禁控制"
+!!! warning "這不是真正的門禁控制"
 
     本頁只產生練習用狀態，不能開門、控制繼電器或判定真實身分。
 
 ## 成功的樣子
 
-執行後顯示 `7 個資料契約案例全部通過`。
+執行後顯示 `6 個資料契約案例全部通過`。
 
 ## 專題環境與資料流
 
@@ -121,7 +121,7 @@ uv run python --version
 檔案：`rfid_contract.py`
 
 ```python
-from collections import defaultdict, deque
+from collections import deque
 from datetime import datetime, timedelta
 
 # 同一張未註冊假卡的計數時間窗。
@@ -153,47 +153,15 @@ def decide(event: dict[str, object], black: set[str], white: set[str], seen: set
     while attempts[key] and when - attempts[key][0] >= WINDOW:
         attempts[key].popleft()
     attempts[key].append(when)
-    return "review_required" if len(attempts[key]) >= 3 else "not_registered"
+    return "review_required" if len(attempts[key]) >= 3 else "unregistered"
 
 
 def event(number: int, minute: int) -> dict[str, object]:
     # 產生固定時間與固定假信封，讓案例每次都可重複執行。
     return {"event_id": f"evt-{number:03}", "device_id": "demo-esp32-01", "occurred_at": f"2030-01-01T08:{minute:02}:00+00:00", "uid_envelope": {"key_id": "test-key", "nonce": "fake-nonce", "ciphertext": "practice-allowed", "tag": "fake-tag"}}
-
-
-def main() -> None:
-    # 每次執行都從空白名單與計數器開始。
-    black: set[str] = set()
-    white: set[str] = set()
-    seen: set[str] = set()
-    attempts: dict[tuple[str, str], deque[datetime]] = defaultdict(deque)
-
-    assert decide(event(1, 0), black, white, seen, attempts) == "not_registered"
-    assert decide(event(2, 2), black, white, seen, attempts) == "not_registered"
-    assert decide(event(3, 4), black, white, seen, attempts) == "review_required"
-
-    # 加入黑名單後，同一筆假資料必須優先被拒絕。
-    black.add("practice-allowed")
-    assert decide(event(4, 6), black, white, seen, attempts) == "blacklisted"
-
-    # 移除黑名單後，白名單才可以讓假資料通過。
-    black.clear()
-    white.add("practice-allowed")
-    assert decide(event(5, 7), black, white, seen, attempts) == "whitelisted"
-
-    try:
-        decide(event(5, 8), black, white, seen, attempts)
-        raise AssertionError("重複事件不應通過")
-    except ValueError:
-        pass
-    print("7 個資料契約案例全部通過")
-
-
-if __name__ == "__main__":
-    main()
 ```
 
-預期結果：程式中只有假信封和假裝置代號，沒有 UID、帳密或網路設定。
+預期結果：程式中只有假信封和假裝置代號，沒有 UID、帳密或網路設定。這個檔案只放資料規則；案例會由下一步的 `check_contract.py` 統一執行。
 
 ## 步驟 2：建立固定案例檢查程式
 
@@ -217,8 +185,8 @@ def main() -> None:
     attempts: dict[tuple[str, str], deque[datetime]] = defaultdict(deque)
 
     # 第 1、2、3 次未註冊，依序確認拒絕與待檢視結果。
-    assert decide(event(1, 0), black, white, seen, attempts) == "not_registered"
-    assert decide(event(2, 2), black, white, seen, attempts) == "not_registered"
+    assert decide(event(1, 0), black, white, seen, attempts) == "unregistered"
+    assert decide(event(2, 2), black, white, seen, attempts) == "unregistered"
     assert decide(event(3, 4), black, white, seen, attempts) == "review_required"
     assert black == set()
 
@@ -229,14 +197,22 @@ def main() -> None:
     black.clear()
     white.add("practice-allowed")
     assert decide(event(5, 7), black, white, seen, attempts) == "whitelisted"
-    print("5 個資料契約案例全部通過")
+
+    # 同一個 event_id 不可重複使用。
+    try:
+        decide(event(5, 8), black, white, seen, attempts)
+        raise AssertionError("重複事件不應通過")
+    except ValueError:
+        pass
+
+    print("6 個資料契約案例全部通過")
 
 
 if __name__ == "__main__":
     main()
 ```
 
-預期結果：兩個 Python 檔案都在 `rfid-project` 資料夾。`rfid_contract.py` 負責規則，`check_contract.py` 負責檢查結果。
+預期結果：兩個 Python 檔案都在 `rfid-project` 資料夾。`rfid_contract.py` 負責規則，`check_contract.py` 是唯一的檢查入口，負責執行 6 個固定案例。
 
 ## 步驟 3：執行案例
 
@@ -246,7 +222,7 @@ if __name__ == "__main__":
 uv run python check_contract.py
 ```
 
-預期結果：顯示 `5 個資料契約案例全部通過`。
+預期結果：顯示 `6 個資料契約案例全部通過`。
 
 ## 完成時，應能確認
 
