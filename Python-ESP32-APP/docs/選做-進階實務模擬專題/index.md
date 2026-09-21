@@ -35,7 +35,7 @@ App → BLE 本地設定 → ESP32
 
 ## 專題安排
 
-[前導技術概要](前導技術概要/index.md)目前提供 MQTT 基礎與 HiveMQ Cloud 基本設定。後續章節則依序處理 API 假資料讀卡、Gateway、LCD、持久化、加密信封、MQTT 家庭事件、App 與 BLE 硬體設定。
+[前導技術概要](前導技術概要/index.md)目前提供 MQTT、HiveMQ Cloud、SPI、RC522、FastAPI、ngrok、Thunkable 與 BLE 的基礎閱讀，以及一個可獨立完成的 FastAPI Hello World 實作。其他最小實作可從各自頁面了解目前範圍；它們彼此不互為前置條件。
 
 ## 重點整理
 

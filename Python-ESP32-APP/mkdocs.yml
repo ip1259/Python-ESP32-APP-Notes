@@ -117,8 +117,23 @@ nav:
           - MQTT:
               - MQTT 基礎：發布、訂閱與 Broker: 選做-進階實務模擬專題/前導技術概要/mqtt基礎.md
               - HiveMQ Cloud 基本設定: 選做-進階實務模擬專題/前導技術概要/hivemq-cloud-基本設定.md
+          - SPI 通訊與多裝置: 選做-進階實務模擬專題/前導技術概要/spi通訊與多裝置.md
+          - RC522:
+              - RC522 與 MFRC522 函式庫: 選做-進階實務模擬專題/前導技術概要/rc522與mfrc522函式庫.md
+              - 選做實作：用 DumpInfo 認識 RC522 與練習卡: 選做-進階實務模擬專題/前導技術概要/rc522-dumpinfo練習.md
+          - FastAPI:
+              - FastAPI：Gateway API 的基本概念: 選做-進階實務模擬專題/前導技術概要/fastapi概念.md
+              - 選做實作：FastAPI Hello World: 選做-進階實務模擬專題/前導技術概要/fastapi-hello-world實作.md
+          - ngrok:
+              - ngrok：暫時公開通道的概念: 選做-進階實務模擬專題/前導技術概要/ngrok暫時通道概念.md
+              - 選做實作：ngrok 設定本機 port: 選做-進階實務模擬專題/前導技術概要/ngrok設定本機port實作.md
+          - Thunkable:
+              - Thunkable：App 與 Web API 的概念: 選做-進階實務模擬專題/前導技術概要/thunkable與web-api概念.md
+              - 選做實作：Thunkable 專題資訊卡介面: 選做-進階實務模擬專題/前導技術概要/thunkable專題資訊卡介面.md
+          - BLE:
+              - BLE：手機與 ESP32 的近距離設定概念: 選做-進階實務模擬專題/前導技術概要/ble近距離設定概念.md
+              - 選做實作：LightBlue 與 ESP32 交換固定資料: 選做-既有BLE-App測試.md
   - 其他選做實作:
-      - 即將推出：選做實作｜既有 BLE App 測試: 選做-既有BLE-App測試.md
       - 即將推出：選做實作｜MAX7219 點陣模組: 選做-MAX7219點陣模組.md
   - 資訊補充:
       - 常見 GUI 與 App 解決方案: 資訊補充-Python後端GUI與App解決方案.md
