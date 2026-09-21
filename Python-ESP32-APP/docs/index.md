@@ -101,7 +101,6 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
   - [資訊補充：MFRC522 函式庫怎麼使用](選做-RFID專題/第1章/mfrc522函式庫介紹.md)
   - [資訊補充：SPI 怎麼讓 ESP32 和 RC522 合作](選做-RFID專題/第1章/spi通訊介紹.md)
 - [專題第 2 章｜ESP32 MQTT 假信封事件](選做-RFID專題/第2章/index.md)
-  - [HiveMQ Cloud 免費測試設定示範](選做-RFID專題/第2章/hivemq-cloud-測試設定.md)
   - [ESP32 MQTT 程式導讀](選做-RFID專題/第2章/mqtt程式導讀.md)
   - [PubSubClient 函式庫介紹](選做-RFID專題/第2章/pubsubclient函式庫介紹.md)
 - [專題第 3 章｜Gateway 名單與最小紀錄](選做-RFID專題/第3章/index.md)
@@ -117,6 +116,8 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 
 - [進階實務模擬專題：結合 MQTT、無線網路、Python 後端的門控模擬](選做-進階實務模擬專題/index.md)
   - [前導技術概要](選做-進階實務模擬專題/前導技術概要/index.md)
+    - [MQTT 基礎：發布、訂閱與 Broker](選做-進階實務模擬專題/前導技術概要/mqtt基礎.md)
+      - [HiveMQ Cloud 基本設定](選做-進階實務模擬專題/前導技術概要/hivemq-cloud-基本設定.md)
 
 ## 其他選做實作
 

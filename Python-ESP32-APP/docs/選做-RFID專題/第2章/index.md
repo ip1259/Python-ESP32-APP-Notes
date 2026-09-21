@@ -61,7 +61,7 @@ HiveMQ Cloud 像代收轉交訊息的櫃檯：它負責把訊息送到訂閱者�
 
 **目的：** 準備 ESP32 與另一個 MQTT 測試用戶端的短期連線資料。
 
-依[HiveMQ Cloud 測試設定](hivemq-cloud-測試設定.md)建立兩組不同、可刪除的測試帳密，兩組都只允許使用一個不含個人資料的完整 topic，例如：
+依[HiveMQ Cloud 基本設定](../../選做-進階實務模擬專題/前導技術概要/hivemq-cloud-基本設定.md)建立兩組不同、可刪除的測試帳密，兩組都只允許使用一個不含個人資料的完整 topic，例如：
 
 ```text
 YOUR_NAMESPACE/devices/demo-esp32-01/messages

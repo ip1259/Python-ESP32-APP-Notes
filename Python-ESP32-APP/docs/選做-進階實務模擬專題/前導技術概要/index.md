@@ -7,6 +7,7 @@
 ## 目前可閱讀
 
 - [MQTT 基礎：發布、訂閱與 Broker](mqtt基礎.md)
+- [HiveMQ Cloud 基本設定](hivemq-cloud-基本設定.md)
 
 ## 閱讀方式
 
@@ -14,4 +15,4 @@
 
 ## 下一步
 
-閱讀[MQTT 基礎：發布、訂閱與 Broker](mqtt基礎.md)。
+先閱讀[MQTT 基礎：發布、訂閱與 Broker](mqtt基礎.md)，需要雲端 MQTT Broker 時再閱讀[HiveMQ Cloud 基本設定](hivemq-cloud-基本設定.md)。
