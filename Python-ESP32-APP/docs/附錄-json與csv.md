@@ -243,10 +243,10 @@ writer = csv.DictWriter(
 ## 完成時，應能確認
 
 - 你能用 `json.loads()` 將 JSON 文字轉成字典，並以欄位名稱讀出值。
-- 你能說明 `json.dumps()` 會將 Python 資料轉回 JSON 文字。
+- 你能理解 `json.dumps()` 會將 Python 資料轉回 JSON 文字。
 - 你開啟 `outputs/sensor_data.csv` 時，看到固定順序的表頭和兩列資料。
 - 你知道 `newline=""` 是使用 `csv` 模組寫檔時的固定寫法，可避免 Windows 出現多餘空白列。
-- 你能說明 `load`／`dump` 處理 JSON 檔，`loads`／`dumps` 處理 JSON 字串。
+- 你能理解 `load`／`dump` 處理 JSON 檔，`loads`／`dumps` 處理 JSON 字串。
 - 你知道 `csv.reader` 讀出串列，`DictReader` 讀出可用欄位名稱取值的字典。
 
 ## 常見問題

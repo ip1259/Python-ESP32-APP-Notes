@@ -81,7 +81,7 @@ with serial.serial_for_url("loop://", baudrate=expected_baud_rate, timeout=0.1) 
 ## 完成時，應能確認
 
 - 你知道埠清單只提供候選值，不等於已找到 ESP32。
-- 你能說明鮑率不一致可能造成亂碼或無法解析。
+- 你能理解鮑率不一致可能造成亂碼或無法解析。
 - 你不會把 `errors="replace"` 的取代字元當成感測資料。
 
 ## 常見問題

@@ -128,7 +128,7 @@ uv run --with pyserial python serial_lifecycle_check.py
 ## 完成時，應能確認
 
 - 你能以已確認的埠和 `115200` 讀到至少一筆 `sensor` JSON。
-- 你能說明空 bytes 是逾時結果，不等於 Python 壞掉。
+- 你能理解空 bytes 是逾時結果，不等於 Python 壞掉。
 - 你知道 `with` 結束後會關閉埠，讓下一個程式可使用它。
 - 遇到存取被拒時，你會先關閉序列監控，而不是任意更換 COM 埠。
 

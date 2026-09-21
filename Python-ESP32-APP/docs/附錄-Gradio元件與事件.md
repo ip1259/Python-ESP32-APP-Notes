@@ -6,7 +6,7 @@ Gradio 能把 Python 資料與函式做成可在本機瀏覽器操作的小工�
 
 - 說明 `gr.Blocks`、`gr.Row`、`gr.Column`、`gr.Group` 與 `gr.Accordion` 如何分工安排介面。
 - 依文字、數字、選項、布林值、表格、字典與圖表選擇常用元件。
-- 說出常見元件的傳入值，以及使用者操作後會交給 Python 的基本型別。
+- 理解常見元件的傳入值，以及使用者操作後會交給 Python 的基本型別。
 - 建立一個不連接 ESP32 的本機「讀書紀錄預覽」介面。
 
 ## 開始前
@@ -40,7 +40,7 @@ Gradio 能把 Python 資料與函式做成可在本機瀏覽器操作的小工�
 | 說明文字 | `gr.Markdown` | Markdown 文字 | 不接收使用者資料 | 標題、操作說明、提醒 |
 
 !!! note "影像與影音元件"
-    `gr.Image`、`gr.Audio`、`gr.Video` 也是常見輸入／輸出元件，適合已完成檔案格式、隱私與容量驗證的影像或影音任務。本課主線目前不需要它們，本頁不提供未驗證的檔案上傳或處理步驟；可從[官方 API 文件](https://www.gradio.app/docs)延伸閱讀。
+    `gr.Image`、`gr.Audio`、`gr.Video` 也是常見輸入／輸出元件，適合已釐清檔案格式、隱私與容量需求的影像或影音任務。本課主線目前不需要它們，本頁不提供檔案上傳或處理步驟；可從[官方 API 文件](https://www.gradio.app/docs)延伸閱讀。
 
 ## 版面容器：決定元件如何分組
 
@@ -153,7 +153,7 @@ uv run --with gradio python gradio_layout_components.py
 ## 完成時，應能確認
 
 - 能依文字、數字、選項、布林值、表格與字典選擇合適的 Gradio 元件。
-- 能說明 `Blocks` 是整頁容器，`Row`／`Column`／`Group`／`Accordion` 只負責版面與分組。
+- 能理解 `Blocks` 是整頁容器，`Row`／`Column`／`Group`／`Accordion` 只負責版面與分組。
 - 能辨認 `interactive=False` 的表格不能由使用者直接修改。
 - 能確認網址為 `127.0.0.1`，程式沒有使用 `share=True` 或外部資料。
 

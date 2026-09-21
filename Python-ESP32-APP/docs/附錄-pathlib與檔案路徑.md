@@ -319,11 +319,11 @@ print(f"今天的輸出資料夾：{dated_folder}")
 
 - 你能用 `Path("outputs") / "sensor_data.csv"` 組合檔案路徑。
 - 你執行 `path_demo.py` 後，看到 `outputs` 資料夾和空白 `sensor_data.csv`。
-- 你能說明 `exists()` 是確認路徑是否存在，`is_file()` 是確認它是否為檔案。
+- 你能理解 `exists()` 是確認路徑是否存在，`is_file()` 是確認它是否為檔案。
 - 你知道 `mkdir(parents=True, exist_ok=True)` 可以讓資料夾已存在時仍安全重複執行。
 - 你能用 `name`、`stem`、`suffix` 與 `parent` 讀取路徑資訊。
 - 你知道 `write_text()` 會覆寫檔案，並只在自己的練習檔使用 `glob()` 和 `replace()`。
-- 你能說出 `unlink()` 只刪除已確認的練習檔，`rmdir()` 只移除空資料夾；不確定時會先改名封存。
+- 你能理解 `unlink()` 只刪除已確認的練習檔，`rmdir()` 只移除空資料夾；不確定時會先改名封存。
 
 ## 常見問題
 

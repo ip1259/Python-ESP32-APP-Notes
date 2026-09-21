@@ -168,7 +168,7 @@ file_handler = RotatingFileHandler(
 ## 完成時，應能確認
 
 - 你知道由應用程式入口集中設定 Handler，讀值函式只記錄事件。
-- 你能說明 `logger.handlers` 和 `propagate` 與重複輸出的關係。
+- 你能理解 `logger.handlers` 和 `propagate` 與重複輸出的關係。
 - 你能在檔案找到 `DEBUG`，並理解為何終端機只顯示 `INFO` 以上。
 - 你知道輪替 log 會淘汰舊檔，只能先用於可重建的練習範圍。
 

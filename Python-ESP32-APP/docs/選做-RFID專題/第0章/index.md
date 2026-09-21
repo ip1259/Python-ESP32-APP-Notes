@@ -7,7 +7,7 @@
 - 用假 `uid_envelope` 表示卡片資料容器，不使用真實 UID。
 - 確認黑名單優先、白名單可通過、未註冊卡拒絕。
 - 確認同一張未註冊假卡、同一裝置、五分鐘內第 3 次會標示 `review_required`，但不自動加入黑名單。
-- 說出 ESP32、MQTT、Gateway、LCD 與 App 在後續章節各自負責什麼。
+- 理解 ESP32、MQTT、Gateway、LCD 與 App 在後續章節各自負責什麼。
 
 ## 開始前
 

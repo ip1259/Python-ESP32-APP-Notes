@@ -147,7 +147,7 @@ print(f"已寫入練習紀錄：{log_path}")
 
 ## 完成時，應能確認
 
-- 你能說明 `INFO`、`WARNING`、`ERROR` 分別適合記錄什麼。
+- 你能理解 `INFO`、`WARNING`、`ERROR` 分別適合記錄什麼。
 - 你能找到 `outputs/logging_demo.log`，並確認它有時間、等級與訊息。
 - 你能讓無法轉成數字的資料回傳 `None`，而不是當成可信溫度寫入。
 - 你知道分享 log 前要先移除敏感資訊，且不會用練習的覆寫模式處理要保存的 log。

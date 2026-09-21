@@ -217,7 +217,7 @@ uv run --with pytest pytest -q
 - 能區分正常、邊界與錯誤資料各自用來發現什麼問題。
 - 能執行 `uv run --with pytest pytest -q`，並知道 `8 passed` 的意思。
 - 能從失敗輸出找到案例名稱與預期／實際差異。
-- 能說明單元測試無法取代 UART、Gradio 與 ESP32 的整合或實機觀察。
+- 能理解單元測試無法取代 UART、Gradio 與 ESP32 的整合或實機觀察。
 
 ## 常見問題
 

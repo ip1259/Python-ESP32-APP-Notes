@@ -131,9 +131,9 @@ PubSubClient 的官方 README 說明：它只能發布 QoS `0`，可訂閱 QoS `
 
 ## 完成時，應能確認
 
-- 能按順序說出 `setServer()`、`setCallback()`、`connect()`、`subscribe()`、`publish()` 與 `loop()` 的角色。
-- 能說出 callback 為何需要 `payload` 與 `length`。
-- 能解釋為什麼回覆必須比對本次 `event_id`。
+- 能依順序理解 `setServer()`、`setCallback()`、`connect()`、`subscribe()`、`publish()` 與 `loop()` 的角色。
+- 能理解 callback 為何需要 `payload` 與 `length`。
+- 能理解為什麼回覆必須比對本次 `event_id`。
 - 能知道 PubSubClient 的 QoS、訊息大小與使用範圍限制。
 
 ## 常見問題

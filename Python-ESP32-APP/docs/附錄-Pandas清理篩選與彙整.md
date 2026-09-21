@@ -158,7 +158,7 @@ print(daily_summary)
 
 ## 完成時，應能確認
 
-- 你能說明 `dropna(subset=...)` 為何比未指定欄位的 `dropna()` 更容易控制。
+- 你能理解 `dropna(subset=...)` 為何比未指定欄位的 `dropna()` 更容易控制。
 - 你能用 `.loc[...]` 建立條件篩選結果，且知道它不會修改原始資料。
 - 你能用 `sort_values()` 檢查資料的排列順序。
 - 你能依日期用 `groupby().agg()` 取得平均值與有效筆數。
