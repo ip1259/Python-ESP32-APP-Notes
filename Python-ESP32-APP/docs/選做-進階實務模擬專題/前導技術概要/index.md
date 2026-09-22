@@ -11,12 +11,15 @@
 - [SPI 通訊與多裝置](spi通訊與多裝置.md)
 - [RC522 與 MFRC522 函式庫](rc522與mfrc522函式庫.md)
 - [FastAPI：Gateway API 的基本概念](fastapi概念.md)
-- [選做實作：FastAPI Hello World](fastapi-hello-world實作.md)
 - [ngrok：暫時公開通道的概念](ngrok暫時通道概念.md)
 - [Thunkable：App 與 Web API 的概念](thunkable與web-api概念.md)
 - [BLE：手機與 ESP32 的近距離設定概念](ble近距離設定概念.md)
 
-## 最小實作
+## 可直接進行的選做實作
+
+- [FastAPI Hello World](fastapi-hello-world實作.md)
+
+## 其他選做主題
 
 - [用 `DumpInfo` 認識 RC522 與練習卡](rc522-dumpinfo練習.md)
 - [ngrok 設定本機 port](ngrok設定本機port實作.md)
@@ -25,7 +28,7 @@
 
 ## 閱讀方式
 
-可以依照頁面排列順序閱讀，也可以先挑選目前需要的工具。各項前導實作彼此獨立，不必照順序完成，也不會因另一頁尚未推出而受到影響。
+可以依照頁面排列順序閱讀，也可以先挑選目前需要的工具。各項前導主題彼此獨立，不必照順序完成，也不會互相成為前置條件。
 
 ## 下一步
 
