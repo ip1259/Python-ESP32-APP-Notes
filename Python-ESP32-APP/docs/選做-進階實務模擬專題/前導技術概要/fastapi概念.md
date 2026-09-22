@@ -6,7 +6,7 @@ FastAPI 是用 Python 建立 API 的工具；API 可以先想成程式之間按�
 
 - 理解 API、路徑、請求與回應的意思。
 - 分辨 `GET` 與 `POST` 的常見用途。
-- 看懂 Python 資料如何成為 JSON 回應。
+- 看懂 Python 資料如何成為 JSON 回應，以及 Pydantic 如何描述送進 API 的資料形狀。
 - 分辨本機 API 與可從外部連入的 API。
 
 ## 開始前
@@ -67,6 +67,36 @@ FastAPI 讓 Python 函式和 API 路徑連在一起。當符合方法與路徑�
 
 FastAPI 能協助處理資料格式與產生 API 文件，但不會替專題自動決定名單規則、資料保存範圍或誰可以使用管理功能。這些仍是 Gateway 程式的責任。
 
+## Pydantic：先描述送進 API 的資料形狀
+
+當 API 要接收用戶端送來的 JSON 資料時，Pydantic 可以先用一個模型描述「應有哪些欄位，以及每個欄位的基本型別」。FastAPI 會依這個模型讀取 request body（請求內容），並在資料不符合模型時回傳錯誤，而不是進入正常處理流程。
+
+下列只是概念節錄，用來認識 `BaseModel`、兩個欄位與 `POST` 的關係；它不是可獨立操作的程式，也不是[選做實作：FastAPI Hello World](fastapi-hello-world實作.md)的前置條件或完成條件。
+
+執行位置：Python／電腦（概念節錄，非獨立操作）<br>
+檔名：`main.py`（概念示例）
+
+```python
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class StatusInput(BaseModel):
+    label: str
+    level: int
+
+
+@app.post("/status")
+def receive_status(status: StatusInput) -> StatusInput:
+    return status
+```
+
+`StatusInput` 繼承 `BaseModel`，表示這筆資料需要 `label` 文字欄位與 `level` 整數欄位。兩個欄位都沒有預設值，因此都是必填欄位。當用戶端以 `POST /status` 傳送 JSON 時，FastAPI 會把資料交給 Pydantic 檢查，再把符合模型的結果放進 `status`。例如缺少 `level` 時，FastAPI 會回傳 `422` JSON 錯誤資訊，`receive_status()` 不會收到這筆不完整資料。
+
+Pydantic 在部分情況會把可轉換的輸入轉成目標型別，因此不能把型別標註理解成所有不完全相同的輸入都一定被拒絕。這種檢查只是在入口先整理資料形狀，不能代替專題規則。例如 `level` 是否在合理範圍、裝置是否被允許送資料、資料是否要保存，都仍要由程式另外處理。
+
 ## 本機與外部連線的差別
 
 `127.0.0.1` 表示「目前這台電腦自己」。只綁定這個位址時，同一台電腦可以使用 API，其他手機或裝置不能直接連入。
@@ -99,10 +129,15 @@ MQTT 不負責這段讀卡請求與回應。只有 Gateway 已完成判斷後，
 
 不一定。它常用來送出資料請伺服器處理，但實際效果仍由該路徑的契約決定。
 
+### Pydantic 會替 API 判斷所有資料都合理嗎？
+
+不會。Pydantic 可以依模型確認必要欄位與基本型別，讓 API 先知道資料大致長什麼樣子；它不會自動知道 `level` 的業務規則、誰有權送資料，或資料是否應該保存。
+
 ## 理解確認
 
 - 能分辨用戶端、Gateway API、請求與回應。
 - 能理解 `GET` 常用於讀取，`POST` 常用於送出資料。
+- 知道 Pydantic 模型可描述 request body 的必填欄位與基本型別。
 - 知道路徑與方法共同決定要使用哪個 API 功能。
 - 知道本機 API 變成外部可連線時，需要額外安全限制。
 
@@ -110,6 +145,7 @@ MQTT 不負責這段讀卡請求與回應。只有 Gateway 已完成判斷後，
 
 - FastAPI 讓 Python 函式成為可由 HTTP 呼叫的 API 路徑。
 - API 雙方必須先約好方法、路徑、欄位、結果與錯誤。
+- Pydantic 的 `BaseModel` 可描述 request body 的必要欄位與基本型別；它是資料入口檢查的一部分，不是權限或專題規則。
 - Gateway 負責資料檢查、規則與最小紀錄；FastAPI 不會自動完成這些決策。
 - 本機 API 與外部可連線 API 的風險範圍不同。
 
@@ -117,6 +153,7 @@ MQTT 不負責這段讀卡請求與回應。只有 Gateway 已完成判斷後，
 
 - [FastAPI 官方教學：First Steps](https://fastapi.tiangolo.com/tutorial/first-steps/)
 - [FastAPI 官方教學：Request Body](https://fastapi.tiangolo.com/tutorial/body/)
+- [Pydantic 官方說明：Models](https://docs.pydantic.dev/latest/concepts/models/)
 
 ## 下一步
 

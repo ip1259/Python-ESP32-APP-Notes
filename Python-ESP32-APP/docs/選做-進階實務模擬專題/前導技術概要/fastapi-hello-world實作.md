@@ -148,6 +148,14 @@ http://127.0.0.1:8000/
 
 確認執行 `uv run fastapi dev main.py` 的終端仍保持開啟，而且網址是 `http://127.0.0.1:8000/`。若終端已有紅色錯誤訊息，先依最上方的錯誤原因檢查檔名、縮排與套件安裝結果。
 
+### 為什麼一般網站輸入網址後是網頁，這裡卻顯示 JSON？
+
+網址只是告訴瀏覽器要向哪個伺服器、哪個路徑提出 HTTP／HTTPS 請求；它不規定回應一定是排版好的網頁。伺服器可以在回應內容中放 HTML，也可以放 JSON、圖片或其他資料。
+
+一般網站常回傳標示為 `text/html` 的 HTML，瀏覽器便會把其中的標籤解析成網頁。這個練習的 `read_root()` 回傳 Python 字典，FastAPI 會把它轉為 JSON，並以 `application/json` 告訴瀏覽器內容是資料，所以你看到的是 `{"message":"Hello World"}`，不是一般的頁面排版。
+
+FastAPI 也可以明確回傳 HTML；不過本頁的目標是讓程式交換最小資料，因此選擇 JSON。看到 JSON 代表這個 API 正常回應，並不是網頁壞掉。
+
 ### `uv init` 修改了另一個專案的設定
 
 這通常表示 `fastapi-hello` 建在另一個 `uv` 專案裡。停止操作，移除這次新建的練習資料夾前先確認其中沒有自己的重要檔案，再到一般練習位置重新建立；不要直接刪除原專案的設定。
@@ -155,7 +163,7 @@ http://127.0.0.1:8000/
 ## 重點整理
 
 - `FastAPI()` 建立 API 應用，`@app.get("/")` 把 Python 函式連到 `GET /`。
-- Python 字典可以成為瀏覽器看到的 JSON 回應。
+- HTTP／HTTPS 可以傳回 HTML 或 JSON；本頁的 Python 字典會成為瀏覽器看到的 JSON 回應。
 - `127.0.0.1` 只代表目前這台電腦。
 - API 需要在終端保持執行；`Ctrl+C` 可以停止這次開發服務。
 
@@ -163,6 +171,7 @@ http://127.0.0.1:8000/
 
 - [FastAPI 官方教學：First Steps](https://fastapi.tiangolo.com/tutorial/first-steps/)
 - [FastAPI 官方說明：Virtual Environments](https://fastapi.tiangolo.com/virtual-environments/)
+- [FastAPI 官方說明：Custom Response（含 HTML 回應）](https://fastapi.tiangolo.com/advanced/custom-response/)
 - [uv 官方說明：Creating projects](https://docs.astral.sh/uv/concepts/projects/init/)
 
 ## 下一步
