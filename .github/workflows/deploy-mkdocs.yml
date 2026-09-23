@@ -31,14 +31,16 @@ jobs:
         uses: actions/setup-python@v6
         with:
           python-version: "3.14"
-      - name: Install MkDocs
-        run: python -m pip install "mkdocs-material>=9.7.7"
+      - name: Set up uv
+        uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+      - name: Install documentation dependencies
+        run: uv sync --locked --no-dev
       - name: Configure GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
       - name: Build site
         run: >-
-          mkdocs build --strict
+          uv run mkdocs build --strict
           --config-file Python-ESP32-APP/mkdocs.yml
           --site-dir "${{ github.workspace }}/site"
       - name: Upload Pages artifact
