@@ -19,6 +19,8 @@ Thunkable 是以畫面元件和積木安排 App 行為的工具。Gateway 是集
 
 本教材選擇 Thunkable，是為了先用積木建立跨平台畫面，練習 App 透過 HTTPS API 取得 JSON 資料，並把注意力放在資料流、畫面與基本錯誤處理。本教材暫時不以完成可上架的產品、管理大量裝置或建立完整 App 架構為目標。
 
+Thunkable 目前主要推廣 AI Vibe Coding（用文字描述需求，讓 AI 協助產生 App）。免費方案提供的 AI token（使用 AI 功能時消耗的額度）有限，有興趣可以自行試用，但不影響本教材的進度。為了看清楚畫面元件與事件邏輯如何組成 App，也避免把 AI 額度當成必要條件，本教材仍採用較傳統的視覺化方式，讓你透過拖放元件與積木式程式理解操作過程。
+
 這不是在比較哪一個工具最好；不同專案會有不同選擇。本專題的 App 規劃為 Gateway API 的用戶端，不改變 ESP32 與 Gateway 的通訊架構，也不讓 App 直接使用 MQTT、Broker 設定或硬體中的秘密資料。
 
 下表不是所有 App 工具的排名，而是比較它們在目前教材範圍中的位置：
@@ -46,7 +48,7 @@ ESP32 → Blynk.Cloud → Blynk App
 
 基於這項取捨，本教材以 Thunkable 作為 App 概念與靜態介面的工具。它的用途是理解「App 透過 Gateway API 使用有限功能」，不是替代 Gateway、MQTT 或 ESP32 的既有角色。
 
-Thunkable 減少的是輸入程式語法與設定開發環境的負擔；資料欄位、要求狀態、錯誤處理、權限與秘密資料仍要由人仔細規劃。帳號方案、手機測試、HTTPS API 整合與 BLE 功能也可能隨版本與裝置改變；完成各項實測前，本頁只說明概念，不把它們當成後續教材的必要條件。
+Thunkable 減少的是輸入程式語法與設定開發環境的負擔；資料欄位、要求狀態、錯誤處理、權限與秘密資料仍要由人仔細規劃。帳號方案、手機測試、HTTPS API 整合與 BLE 功能可能隨版本與裝置改變；本頁只介紹概念，實作時以對應選做頁與官方文件列出的條件為準。
 
 ## App 畫面與行為是兩個部分
 
@@ -137,6 +139,8 @@ App 是 Gateway API 的用戶端，不是規則中心。Gateway 才負責檢查�
 ## 參考資料
 
 - [Thunkable 官方文件：Getting Started](https://docs.thunkable.com/getting-started)
+- [Thunkable 官方網站：AI Builder](https://thunkable.com/ai)
+- [Thunkable 官方網站：方案與 AI token 額度](https://thunkable.com/pricing)
 - [Thunkable 官方文件：Web APIs Blocks](https://docs.thunkable.com/blocks/advanced-app-features/web-api)
 - [Thunkable 官方文件：Bluetooth Low Energy Blocks](https://docs.thunkable.com/blocks/advanced-app-features/bluetooth-low-energy)
 - [Thunkable 官方文件：Objects Blocks](https://docs.thunkable.com/blocks/core-features/objects)
@@ -153,4 +157,4 @@ App 是 Gateway API 的用戶端，不是規則中心。Gateway 才負責檢查�
 
 ## 下一步
 
-查看[Thunkable 專題資訊卡介面](thunkable專題資訊卡介面.md)。這項實作只建立靜態畫面，不連接 API、BLE 或其他服務。
+接著可進行[選做實作：Thunkable 瀏覽政府開放資料清單](thunkable專題資訊卡介面.md)。你會調整 `page`、`size` 查詢參數，保存 API 回傳的 JSON 清單，並在 Thunkable Live 中選擇顯示其中一筆公開資料；不會連接 BLE、ESP32 或其他服務。
