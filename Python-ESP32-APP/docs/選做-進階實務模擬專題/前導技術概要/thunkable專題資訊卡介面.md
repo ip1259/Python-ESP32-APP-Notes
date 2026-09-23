@@ -46,200 +46,197 @@
 
 ## Stage 0：建立 Thunkable 專案
 
-### 1. 建立帳號或登入
+### 1. 開啟登入入口（圖 0-001）
 
 開啟 [Thunkable 官網](https://thunkable.com/)。尚未有帳號時選擇 `Sign up`；已有帳號時選擇 `Login`。
 
-![Thunkable 官網右上角的 Sign up 入口](../../assets/thunkable-calendar/stage0-sign-up.png)
+![圖 0-001：Thunkable 官網右上角的 Sign up 入口](../../assets/thunkable-calendar/stage0-sign-up.png)
 
-註冊畫面可能提供 Google、Apple 或電子郵件。本頁後面的手機測試依官方文件整理 Google 與電子郵件兩種連線方式，因此建議本練習選擇其中一種。若你已使用 Apple 登入，請先查看官方 Live Test 文件是否已有適用的連線方式；無法確認時可停止手機測試，不影響你閱讀其餘步驟。不要把帳號、密碼或登入郵件記錄在公開專案中。
+接著會進入選擇登入方式的畫面。
 
-![Thunkable 註冊畫面的 Google、Apple 與電子郵件選項](../../assets/thunkable-calendar/stage0-account-options.png)
+### 2. 選擇登入方式（圖 0-002）
 
-### 2. 從新版首頁進入積木工作區
+選擇 Google 或電子郵件登入。本頁後面的手機測試依官方文件整理這兩種連線方式；若你已使用 Apple 登入，請先查看官方 Live Test 文件是否有適用方式，無法確認時可停止手機測試。
 
-登入後可能先進入新版 Thunkable AI 首頁。這個畫面不是本頁使用的積木編輯器；選擇左上角的 `Go to x.thunkable.com` 進入有 Design 與 Blocks 的工作區。
+![圖 0-002：Thunkable 註冊畫面的登入選項](../../assets/thunkable-calendar/stage0-account-options.png)
 
-![新版首頁左上角的 Go to x.thunkable.com 入口](../../assets/thunkable-calendar/stage0-open-builder.png)
+登入後，不要把帳號、密碼或登入郵件記錄在公開專案中。
 
-進入工作區後，依序選擇左側的 `My Projects`，再選擇畫面中的 `Create Blank Project`。如果按鈕位置因改版而不同，可先回到 `My Projects` 專案清單尋找建立空白專案的入口；不要使用 AI 產生專案取代本頁的元件與積木步驟。
+### 3. 進入積木工作區（圖 0-003）
 
-![從 My Projects 選擇 Create Blank Project](../../assets/thunkable-calendar/stage0-my-projects.png)
+登入後若先看到新版 Thunkable AI 首頁，選擇左上角的 `Go to x.thunkable.com`。本頁使用的是有 Design 與 Blocks 的積木工作區。
 
-### 3. 建立空白專案
+![圖 0-003：新版首頁的 Go to x.thunkable.com 入口](../../assets/thunkable-calendar/stage0-open-builder.png)
 
-1. Project Name（專案名稱）可填入 `calendar-browser`。
-2. 若畫面要求 Category（分類），可選擇適合測試用途的 `Just Testing`。
-3. 若只能選擇 Public（公開），再次確認專案中沒有敏感資料。
-4. 保持 `Use the Drag and Drop Builder` 已勾選，再選擇 `Create`。
+畫面切換後，應能找到專案清單，而不是只有 AI 文字輸入區。
 
-![建立專案時可選擇公開狀態與 Drag and Drop Builder](../../assets/thunkable-calendar/stage0-create-project.png)
+### 4. 建立空白專案（圖 0-004）
 
-建立完成後，上方應能切換 `Design` 與 `Blocks`。完成時，應能確認你有一個可在 Design 區放入元件、可在 Blocks 區編輯事件的空白專案；若仍停留在文字輸入的 AI 產生頁，請回到上一步進入 `x.thunkable.com`。
+在工作區依序選擇左側 `My Projects`，再選擇 `Create Blank Project`。若改版後按鈕位置不同，先回到 `My Projects` 尋找建立空白專案的入口；不要用 AI 產生專案取代本頁的元件與積木。
+
+![圖 0-004：從 My Projects 選擇 Create Blank Project](../../assets/thunkable-calendar/stage0-my-projects.png)
+
+選擇後會開啟專案基本資料與建立方式的設定畫面。
+
+### 5. 填寫專案設定並建立（圖 0-005）
+
+Project Name（專案名稱）可填 `calendar-browser`；Category（分類）若必填可選 `Just Testing`。若只能建立 Public（公開）專案，確認沒有敏感資料後，保持 `Use the Drag and Drop Builder` 已勾選，選擇 `Create`。
+
+![圖 0-005：建立專案時選擇公開狀態與 Drag and Drop Builder](../../assets/thunkable-calendar/stage0-create-project.png)
+
+建立完成後，上方應能切換 `Design` 與 `Blocks`。完成時，應能確認你有一個可放入元件、編輯事件的空白專案。
 
 ## Stage 1：建立 Page 與 Size 介面
 
-先做不連網的介面。這一步只確認 Slider 與 Label 的互動，還不會讀取 API。
+先做不連網的介面；這個 Stage 只確認 Slider 與 Label 的互動，還不會讀取 API。
 
-### 1. 加入元件並命名
+### 1. 先辨認 Design 畫面的區域（圖 1-001）
 
-在 Design 區依下表加入元件。畫面排列可自行調整，但請維持相同的元件名稱，後續積木才容易對照。
+切到 `Design` 分頁。先辨認左側的 Component Tree（元件樹）與 Add Components（元件庫）、中央的手機預覽區，以及右側的元件參數編輯區。圖中的數值只是介面位置範例，這一步先不要照著設定。
 
-| 畫面用途 | 元件名稱 | 建議初始文字或設定 |
-| --- | --- | --- |
-| 顯示目前設定 | `Label_Para` | `Page: 0, Size: 50` |
-| 說明頁碼 | `Label_Page1` | `Page` |
-| 選擇頁碼 | `Slider_Page` | 最小值 `0`、初始值 `0`、`Step` 設為 `1` |
-| 說明每頁筆數 | `Label_Size1` | `Size` |
-| 選擇每頁筆數 | `Slider_Size` | 最小值 `1`、最大值 `100`、初始值 `50`、`Step` 設為 `1` |
+![圖 1-001：Design 畫面的元件樹、元件庫、預覽區與參數編輯區](../../assets/thunkable-calendar/stage1-design-overview.png)
 
-### 2. 初始化 Slider 範圍
+點選元件樹中的元件後，右側會顯示該元件可調整的文字、數值與範圍。
 
-在 Blocks 區建立 App 變數 `TOTAL_DATA_COUNTS`，暫時設為 `2000`。它只是用來推估可選的最大頁碼，**不是** API 保證提供的即時總筆數。
+### 2. 加入、重新命名並設定元件（圖 1-002）
 
-在 `Screen Starts` 建立「元件初始化」函式，完成下列設定：
+從 Add Components 拖入 3 個 Label 與 2 個 Slider，再於元件樹中重新命名為 `Label_Para`、`Label_Page1`、`Slider_Page`、`Label_Size1`、`Slider_Size`。將 `Label_Para` 設為 `Page: 0, Size: 50`；另外兩個 Label 分別設為 `Page`、`Size`。`Slider_Page` 的最小值與初始值都是 `0`；`Slider_Size` 的最小值、最大值、初始值分別為 `1`、`100`、`50`，兩個 Slider 的 `Step` 都是 `1`。
 
-1. `Slider_Size` 的最小值設為 `1`、最大值設為 `100`、初始值設為 `50`。
-2. `Slider_Page` 的最小值與初始值設為 `0`。
-3. 先計算 `2000 ÷ 目前 size` 並無條件進位，再減 `1`；也就是 `ceil(2000 ÷ 目前 size) − 1`，將結果設成 `Slider_Page` 的最大值。
-4. 呼叫下一步的「更新參數顯示」函式。
+![圖 1-002：拖入 Label 與 Slider，並從元件樹選取及重新命名](../../assets/thunkable-calendar/stage1-add-and-rename-components.png)
 
-當 `Slider_Size` 改變時，也要重新計算 `Slider_Page` 的最大值；若目前頁碼超過新上限，將它調回上限。兩個 Slider 的 `Step` 都設為 `1`，避免把小數送給 API。
+完成後，元件樹應有 3 個 Label 與 2 個 Slider；中央預覽區能看到 Page、Size 與兩條 Slider。此時移動 Slider，`Label_Para` 還不會自動更新。
 
-![初始化每頁筆數、頁碼與預估頁碼上限的 Blocks](../../assets/thunkable-calendar/stage1-parameter-blocks.png)
+### 3. 初始化 Slider 範圍（圖 1-003）
 
-Size Slider 的 Value Change 事件要使用相同的頁碼上限公式，再更新畫面文字。下圖顯示 Size 改變時，先限制 Page 範圍再呼叫更新函式。
+在 Blocks 區建立 App 變數 `TOTAL_DATA_COUNTS`，暫時設為 `2000`。它只用來推估可選的最大頁碼，**不是** API 保證提供的即時總筆數。接著在 `Screen Starts` 建立「元件初始化」函式：設定兩個 Slider 的初始值，並把 `Slider_Page` 最大值設成 `ceil(2000 ÷ 目前 size) − 1`，最後呼叫「更新參數顯示」。
 
-![Size 改變時重新計算 Page 上限並更新顯示](../../assets/thunkable-calendar/stage1-size-change.png)
+![圖 1-003：初始化每頁筆數、頁碼與預估頁碼上限的 Blocks](../../assets/thunkable-calendar/stage1-parameter-blocks.png)
+
+畫面第一次開啟時，`Slider_Size` 應在 `50`，`Slider_Page` 應從 `0` 開始。
+
+### 4. 處理 Size 改變事件（圖 1-004）
+
+在 `Slider_Size Value Change` 事件套用相同的頁碼上限公式；若目前頁碼超過新上限，將它調回上限，再呼叫「更新參數顯示」。兩個 Slider 的 Value Change 事件都要呼叫這個顯示函式，將 `Label_Para` 更新成 `Page: <Slider_Page 的值>, Size: <Slider_Size 的值>`。
 
 !!! warning "請把圖中的 round 改成 round up"
     原始操作截圖的下拉選項顯示一般的 `round`，實作時請改選 `round up`（無條件進位），讓公式與初始化積木一致：`ceil(TOTAL_DATA_COUNTS ÷ Slider_Size.value) − 1`。若使用一般四捨五入，當總筆數無法被 `size` 整除時，可能會少算最後一頁。
 
-### 3. 顯示目前參數
+![圖 1-004：Size 改變時重新計算 Page 上限並更新顯示](../../assets/thunkable-calendar/stage1-size-change.png)
 
-建立「更新參數顯示」函式，將 `Label_Para` 的文字更新成 `Page: <Slider_Page 的值>, Size: <Slider_Size 的值>`。在兩個 Slider 的 Value Change 事件中呼叫它。
-
-完成時，應能確認移動任一 Slider 後，`Label_Para` 立刻顯示相同的數值。此時畫面仍不會讀取網路資料。
+完成時，應能確認移動任一 Slider 後，`Label_Para` 立刻顯示相同的數值，且畫面仍不會讀取網路資料。
 
 ## Stage 2：設定 Web API 並用固定參數讀取
 
-### 1. 加入讀取與顯示元件
+### 1. 確認 API 的參數（圖 2-001）
 
-在 Design 區再加入下列元件：
+先查看新北市政府資料開放平臺的 API 說明：`page` 是從 `0` 起算的頁碼，`size` 是每頁筆數。這個 Stage 先用固定的 `page: 0`、`size: 100`，尚未和 Slider 連動。
 
-| 畫面用途 | 元件名稱 | 建議初始設定 |
-| --- | --- | --- |
-| 發出要求 | `Button_Call` | 文字：`GET API` |
-| 顯示訊息或一筆資料 | `Result_Text`（Rich Text） | 文字：`初始化` |
-| 選擇本次清單的一筆 | `Slider_index` | 最小值 `1`、初始值 `1`、`Step` 設為 `1`、先設為停用 |
+![圖 2-001：政府開放資料 API 說明中的 page 與 size 參數](../../assets/thunkable-calendar/stage2-api-parameters.png)
 
-再到 Blocks 區的 Advanced 加入 Web APIs 元件，命名為 `Web_API1`。建立 App 變數 `api_response`，初始值為 empty list（空清單）。
+記住這組固定值；Stage 3 才會改用 Slider 的值。
 
-![從 Blocks 的 Advanced 區加入 Web APIs 元件](../../assets/thunkable-calendar/stage2-add-web-api.png)
+### 2. 加入 Web API 元件（圖 2-002）
 
-加入按鈕、Rich Text 與資料索引 Slider 後，畫面可先排成下圖的上下順序；元件大小可以依手機畫面調整。
+到 Blocks 的 Advanced 加入 Web APIs 元件，命名為 `Web_API1`；同時建立 App 變數 `api_response`，初始值為 empty list（空清單）。
 
-![加入 Rich Text、GET API 按鈕與資料索引 Slider](../../assets/thunkable-calendar/stage2-result-components.png)
+![圖 2-002：從 Blocks 的 Advanced 區加入 Web APIs 元件](../../assets/thunkable-calendar/stage2-add-web-api.png)
 
-回到初始化函式，將 `Result_Text` 設為「初始化」、按鈕文字設為 `GET API`，再把 `Slider_index` 的最小值、最大值與目前值設為 `1`，`Step` 設為 `1` 並先停用。這能避免 API 尚未回應時讀取不存在的清單項目。
+加入後，`Web_API1` 會出現在 Blocks 的元件清單中。
 
-![初始化結果文字、按鈕與資料索引 Slider](../../assets/thunkable-calendar/stage2-index-initialization.png)
+### 3. 設定 Web API（圖 2-003）
 
-### 2. 設定端點與固定查詢參數
+開啟 `Web_API1` 設定，URL 填入 `https://data.ntpc.gov.tw/api/datasets/308dcd75-6434-45bc-a95f-584da4fed251/json`；Query Parameters 分別新增 `page: 0`、`size: 100`；Headers 新增 `accept: application/json`。
 
-新北市政府資料開放平臺的 API 說明將 `page` 定義為從 `0` 起算的頁碼，`size` 是每頁筆數。先辨認這兩個參數，再回到 Thunkable 設定元件。
-
-![政府開放資料 API 說明中的 page 與 size 參數](../../assets/thunkable-calendar/stage2-api-parameters.png)
-
-開啟 `Web_API1` 的設定，填入以下內容：
-
-| 欄位 | 值 |
-| --- | --- |
-| URL | `https://data.ntpc.gov.tw/api/datasets/308dcd75-6434-45bc-a95f-584da4fed251/json` |
-| Query Parameters | `page: 0` 與 `size: 100` |
-| Headers | `accept: application/json` |
+![圖 2-003：Web API 的 URL、Query Parameters 與 Header 設定](../../assets/thunkable-calendar/stage2-web-api-settings.png)
 
 !!! warning "URL 不要包含查詢參數"
-    URL 欄位只能填端點本體，**不要**填入 `?page=0&size=100`。`page`、`size` 要分別新增到 Query Parameters。這樣下一個 Stage 才能安全地用 Slider 的值更新它們，且不會出現兩組重複參數。
+    URL 欄位只能填端點本體，**不要**填入 `?page=0&size=100`。`page`、`size` 要分別新增到 Query Parameters，才能在 Stage 3 安全地用 Slider 更新它們。
 
-![Web API 的 URL、Query Parameters 與 Header 設定](../../assets/thunkable-calendar/stage2-web-api-settings.png)
+設定儲存後，Web API 會先以固定的 `page: 0` 與 `size: 100` 準備讀取。
 
-### 3. 先確認固定 GET 能讀到清單
+### 4. 加入讀取與顯示元件（圖 2-004）
 
-在 `Button_Call Click` 事件中呼叫 `Web_API1 Get`。回傳的 `response`、`status`、`error` 是本次要求的結果；先在沒有 `error` 時，把 `response` 用「get object from JSON」轉成 JSON 清單，保存到 `api_response`，並在 `Result_Text` 顯示 `收到資料，共計：<清單長度> 筆`。
+回到 Design 區，加入 `Button_Call`、`Result_Text`（Rich Text）與 `Slider_index`。按鈕文字設為 `GET API`，Rich Text 初始文字設為「初始化」；資料索引 Slider 最小值和初始值為 `1`，`Step` 為 `1`，先設為停用。
 
-![按下按鈕後取得 JSON、保存清單並顯示筆數的 Blocks](../../assets/thunkable-calendar/stage2-basic-get.png)
+![圖 2-004：加入 Rich Text、GET API 按鈕與資料索引 Slider](../../assets/thunkable-calendar/stage2-result-components.png)
 
-這個 Stage 的 `page: 0`、`size: 100` 是直接寫在 Web API 元件內的固定初始值，尚未與兩個 Slider 連動。因此即使 `Label_Para` 顯示 `Size: 50`，按下按鈕仍會收到 100 筆；這是本階段預期的中間結果。
+資料索引 Slider 先停用，可避免還沒收到清單時讀取不存在的資料。
 
-完成時，應能確認按下按鈕後顯示收到的筆數，並理解它目前來自 Web API 的固定參數。
+### 5. 初始化讀取元件（圖 2-005）
 
-下圖是這個中間階段的預期結果：畫面 Label 仍顯示 `Size: 50`，但 Web API 使用固定的 `size: 100`，所以收到 100 筆。下一個 Stage 才會把兩者連結。
+回到 Stage 1 的初始化函式，將 `Result_Text` 設為「初始化」、按鈕文字設為 `GET API`。把 `Slider_index` 的最小值、最大值與目前值設為 `1`，`Step` 設為 `1` 並保持停用。
 
-![固定 size 仍為 100 時，Thunkable Live 顯示收到 100 筆](../../assets/thunkable-calendar/stage2-fixed-result.jpg)
+![圖 2-005：初始化結果文字、按鈕與資料索引 Slider](../../assets/thunkable-calendar/stage2-index-initialization.png)
+
+重新開啟畫面時，應先看到初始化訊息與無法移動的資料索引 Slider。
+
+### 6. 用固定參數呼叫 GET（圖 2-006）
+
+在 `Button_Call Click` 事件中呼叫 `Web_API1 Get`。沒有 `error` 時，把 `response` 用「get object from JSON」轉成 JSON 清單，保存到 `api_response`，並在 `Result_Text` 顯示 `收到資料，共計：<清單長度> 筆`。
+
+![圖 2-006：按下按鈕後取得 JSON、保存清單並顯示筆數的 Blocks](../../assets/thunkable-calendar/stage2-basic-get.png)
+
+此時即使 `Label_Para` 顯示 `Size: 50`，GET 仍使用 Web API 設定中的固定 `size: 100`；這是本階段預期的中間結果。
+
+### 7. 確認固定讀取結果（圖 2-007）
+
+按下 `GET API`，觀察畫面是否收到 100 筆。這張圖中的 Label 仍是 `Size: 50`，但 Web API 的固定 `size: 100` 生效，因此顯示 100 筆。
+
+![圖 2-007：固定 size 為 100 時，Thunkable Live 顯示收到 100 筆](../../assets/thunkable-calendar/stage2-fixed-result.jpg)
+
+完成時，應能分辨畫面 Label 的數值與 Web API 固定參數仍是兩件事；下一個 Stage 才會把兩者連結。
 
 ## Stage 3：讓 Slider 更新 Query Parameters
 
-回到 Stage 1 的「更新參數顯示」函式。在更新 `Label_Para` 後，加入「set `Web_API1`'s QueryParameters」積木，使用 create object（建立物件）設定：
+### 1. 寫入動態查詢參數（圖 3-001）
 
-| Property | Value |
-| --- | --- |
-| `page` | `Slider_Page` 的 value |
-| `size` | `Slider_Size` 的 value |
+回到 Stage 1 的「更新參數顯示」函式。在更新 `Label_Para` 後，加入「set `Web_API1`'s QueryParameters」積木，使用 create object（建立物件）：`page` 填 `Slider_Page` 的 value，`size` 填 `Slider_Size` 的 value。
 
-![以 create object 將兩個 Slider 值寫入 Query Parameters](../../assets/thunkable-calendar/stage3-query-parameters.png)
+![圖 3-001：以 create object 將兩個 Slider 值寫入 Query Parameters](../../assets/thunkable-calendar/stage3-query-parameters.png)
 
-現在移動 Page 或 Size Slider 只是在準備下一次要求；請等畫面不是「讀取中」時，再按 `GET API`。例如設定 `page=0`、`size=50` 後，成功時應收到 50 筆，表示這次回應已使用 Slider 的值。
+移動 Page 或 Size Slider 現在只是在準備下一次要求；請等畫面不是「讀取中」時，再按 `GET API`。
 
-完成時，應能確認調整 `size` 後重新按 `GET API`，收到的筆數會隨設定改變。
+### 2. 確認動態讀取結果（圖 3-002）
 
-例如畫面設定 `Size: 50` 後收到 50 筆，便能確認這次 Query Parameters 已使用 Slider 的值。
+設定 `page=0`、`size=50` 後按 `GET API`。若畫面顯示收到 50 筆，表示這次 Query Parameters 已使用 Slider 的值。
 
-![動態 size 設為 50 後，Thunkable Live 顯示收到 50 筆](../../assets/thunkable-calendar/stage3-dynamic-result.jpg)
+![圖 3-002：動態 size 設為 50 後，Thunkable Live 顯示收到 50 筆](../../assets/thunkable-calendar/stage3-dynamic-result.jpg)
+
+完成時，應能確認調整 `size` 後重新讀取，收到的筆數會跟著改變。
 
 ## Stage 4：顯示一筆資料並處理讀取狀態
 
-### 1. 建立「更新讀取結果顯示」函式
+### 1. 建立單筆資料顯示函式（圖 4-001）
 
-建立函式後先判斷 `length of api_response > 0`：
+建立「更新讀取結果顯示」函式，先判斷 `length of api_response > 0`。有資料時，從 `api_response` 取出 `Slider_index` 指定的一筆，將序號、`name`、`holidaycategory`、`date` 組成 `Result_Text`；清單是空的時，顯示「讀到的資料清單為空」。
 
-- 有資料時，從 `api_response` 取出 `Slider_index` 指定的那一筆物件，將序號、`name`、`holidaycategory`、`date` 組成 `Result_Text` 的文字。
-- 清單是空的時，顯示「讀到的資料清單為空」。
+![圖 4-001：依資料索引讀取一筆物件並顯示欄位的 Blocks](../../assets/thunkable-calendar/stage4-show-one-item.png)
 
-`name` 可能是空白，例如一般週末不一定有特別名稱；空白不代表 API 讀取失敗。`holidaycategory` 與 `date` 的內容也可能隨資料來源更新而改變。
+`name` 可能是空白，例如一般週末未必有特別名稱；空白不代表 API 讀取失敗。
 
-![依資料索引讀取一筆物件並顯示欄位的 Blocks](../../assets/thunkable-calendar/stage4-show-one-item.png)
+### 2. 在讀取時處理舊資料、錯誤與狀態（圖 4-002）
 
-在 `Slider_index Value Change` 事件呼叫這個函式。這個事件不呼叫 `Get`，因此滑動資料索引 Slider 只會切換已收到的清單內容。
+把 `Button_Call Click` 改為：先停用 `Button_Call` 與 `Slider_index`，把資料索引最大值與目前值重設為 `1`，顯示「讀取中...」，並將 `api_response` 設為 empty list，最後呼叫 `Web_API1 Get`。回呼中先判斷沒有 `error`，再判斷 `status = 200`；成功才轉換並保存 `response`。若清單有資料，將資料索引最大值設成實際清單長度並解除停用；無論清單是否有資料，都呼叫「更新讀取結果顯示」。
 
-![資料索引 Slider 改變時只更新顯示內容](../../assets/thunkable-calendar/stage4-index-event.png)
+![圖 4-002：讀取中、清空舊清單、檢查 error 與 status 的 Blocks](../../assets/thunkable-calendar/stage4-request-handling.png)
 
-### 2. 在按下按鈕時先清除舊狀態
+發生 `error` 時顯示 `收到錯誤：<錯誤內容>`；沒有 `error` 但 `status` 不是 `200` 時，顯示 `收到異常狀態碼：<status>`。兩種情況都保持資料索引 Slider 停用，回呼結束前重新啟用 `Button_Call`。
 
-把 `Button_Call Click` 事件改成下列順序：
+### 3. 讓資料索引只切換本次清單（圖 4-003）
 
-1. 停用 `Button_Call` 與 `Slider_index`。
-2. 將 `Slider_index` 的最大值與目前值重設為 `1`。
-3. 將 `Result_Text` 改為「讀取中...」，並把 `api_response` 設為 empty list。
-4. 呼叫 `Web_API1 Get`。
+在 `Slider_index Value Change` 事件呼叫「更新讀取結果顯示」函式，但不要呼叫 `Get`。
 
-在 `Get` 回呼中先判斷沒有 `error`，再判斷 `status = 200`。只有兩者都成立時，才把 `response` 轉為 JSON 並保存到 `api_response`。若清單有資料，先把 `Slider_index` 的最大值設成實際清單長度並解除停用；接著無論清單是否有資料，都呼叫「更新讀取結果顯示」函式，讓空清單也能顯示對應訊息。
+![圖 4-003：資料索引 Slider 改變時只更新顯示內容](../../assets/thunkable-calendar/stage4-index-event.png)
 
-發生 `error` 時，清空清單並顯示 `收到錯誤：<錯誤內容>`；沒有 `error` 但 `status` 不是 `200` 時，顯示 `收到異常狀態碼：<status>`。兩種情況都不要重新啟用資料索引 Slider。回呼結束前重新啟用 `Button_Call`。
+移動資料索引 Slider 時，Rich Text 應只切換已收到的資料，不會重新送出 API 要求。
 
-![讀取中、清空舊清單、檢查 error 與 status 的 Blocks](../../assets/thunkable-calendar/stage4-request-handling.png)
+### 4. 用 Thunkable Live 測試（圖 4-004）
 
-### 3. 用 Thunkable Live 測試
+在電腦開啟專案後，依官方[測試步驟](https://docs.thunkable.com/getting-started/live-test)連接 Thunkable Live：在瀏覽器選擇 `Live Test on Device`，再於 Android 或 iOS 裝置開啟 Thunkable Live。Google 登入時，手機使用同一個 Google 帳號；電子郵件登入時，瀏覽器選 `Enter my code`，手機選 `Email sign in - Generate test code`，輸入測試碼後選 `Connect`。
 
-在電腦開啟專案後，依官方[測試步驟](https://docs.thunkable.com/getting-started/live-test)連接 Thunkable Live：
+![圖 4-004：Thunkable Live 顯示所選行事曆資料的成功結果](../../assets/thunkable-calendar/stage4-live-result.jpg)
 
-1. 在瀏覽器的專案畫面選擇 `Live Test on Device` 圖示。
-2. 在 Android 或 iOS 裝置開啟 Thunkable Live。
-3. 若瀏覽器使用 Google 登入，手機也使用同一個 Google 帳號登入。
-4. 若瀏覽器使用電子郵件登入，在瀏覽器選擇 `Enter my code`；接著在手機選擇 `Email sign in - Generate test code`，把手機顯示的測試碼輸入瀏覽器並選擇 `Connect`。
-5. 在手機的專案清單開啟本頁建立的專案，再測試 Page、Size、`GET API` 與資料索引 Slider。
-
-不要只看電腦預覽畫面就判定網路讀取成功。若官方 App 的按鈕名稱已改變，以官方測試頁目前列出的流程為準。
+在手機開啟本頁建立的專案，測試 Page、Size、`GET API` 與資料索引 Slider。公開資料可能更新，所以日期、分類與索引不必和圖片相同；重點是參數、索引與單筆欄位會依操作改變。
 
 !!! warning "讀取中不要改參數"
     本練習在讀取期間會停用按鈕與資料索引 Slider，但 Page／Size Slider 仍可移動。`Result_Text` 顯示「讀取中...」時請不要調整 Page 或 Size；先等這次要求結束，再設定下一次要讀取的參數。若手機沒有 Android 或 iOS 裝置可安裝 Thunkable Live，請停止本項選做實作。
@@ -250,10 +247,6 @@ Size Slider 的 Value Change 事件要使用相同的頁碼上限公式，再更
 - 成功且有資料時，資料索引 Slider 的最大值等於本次實際筆數。
 - 移動資料索引 Slider 後，Rich Text 顯示該筆的 `name`、`holidaycategory`、`date`，不會重新送出 API 要求。
 - 發生錯誤、狀態碼不是 `200` 或收到空清單時，畫面有對應訊息，且無法誤讀前一次資料。
-
-下圖是 Thunkable Live 的成功結果範例。公開資料可能更新，因此你看到的日期、分類與資料索引不必和圖片完全相同；重點是參數、索引與單筆欄位會依操作改變。
-
-![Thunkable Live 顯示所選行事曆資料的成功結果](../../assets/thunkable-calendar/stage4-live-result.jpg)
 
 ## 常見問題
 
