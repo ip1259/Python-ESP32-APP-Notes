@@ -94,25 +94,6 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
 
 - [資訊補充：高併發、分散式系統與資料同步問題](資訊補充-高併發分散式系統與資料同步問題.md)
 
-## 舊版參考：RFID 門禁系統（停止更新）
-
-- [專題第 0 章｜準備、安全與資料契約](選做-RFID專題/第0章/index.md)
-  - [資訊補充：資料契約為何要先固定](選做-RFID專題/第0章/資料契約為何要先固定.md)
-- [專題第 1 章｜RC522 RFID 與 SPI](選做-RFID專題/第1章/index.md)
-  - [資訊補充：MFRC522 函式庫怎麼使用](選做-RFID專題/第1章/mfrc522函式庫介紹.md)
-  - [資訊補充：SPI 怎麼讓 ESP32 和 RC522 合作](選做-RFID專題/第1章/spi通訊介紹.md)
-- [專題第 2 章｜ESP32 MQTT 假信封事件](選做-RFID專題/第2章/index.md)
-  - [ESP32 MQTT 程式導讀](選做-RFID專題/第2章/mqtt程式導讀.md)
-  - [PubSubClient 函式庫介紹](選做-RFID專題/第2章/pubsubclient函式庫介紹.md)
-- [專題第 3 章｜Gateway 名單與最小紀錄](選做-RFID專題/第3章/index.md)
-  - [Gateway 程式導讀](選做-RFID專題/第3章/gateway程式導讀.md)
-  - [FastAPI 概念介紹](選做-RFID專題/第3章/fastapi概念介紹.md)
-- [專題第 4 章｜LCD 狀態顯示](選做-RFID專題/第4章/index.md)
-  - [LCD 狀態顯示程式導讀](選做-RFID專題/第4章/lcd程式導讀.md)
-- [專題第 5 章｜Thunkable、ngrok 與手機無線控制](選做-MIT-App-Inventor-ngrok與手機無線控制.md)
-- [專題第 6 章｜端對端故障分流](選做-端對端故障分流.md)
-- [專題第 7 章｜真實門控系統的安全總結](選做-真實門控系統安全總結.md)
-
 ## 選做專題：進階實務模擬專題
 
 - [進階實務模擬專題：結合 MQTT、無線網路、Python 後端的門控模擬](選做-進階實務模擬專題/index.md)
