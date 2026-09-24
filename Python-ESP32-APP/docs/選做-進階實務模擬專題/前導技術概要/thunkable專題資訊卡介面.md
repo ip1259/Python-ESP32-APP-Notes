@@ -92,7 +92,7 @@ Project Name（專案名稱）可填 `calendar-browser`；Category（分類）�
 
 ### 1. 先辨認 Design 畫面的區域（圖 1-001）
 
-切到 `Design` 分頁。先辨認左側的 Component Tree（元件樹）與 Add Components（元件庫）、中央的手機預覽區，以及右側的元件參數編輯區。圖中的數值只是介面位置範例，這一步先不要照著設定。
+切到 `Design` 分頁。先辨認左側的 Component Tree（元件樹）與 Add Components（元件庫）、中央的手機預覽區，以及右側的元件參數編輯區。圖 1-001 是元件已加入後的區域導覽示意；你此時還沒看到圖中的 Label、Slider 或名稱是正常的，下一步才會建立。圖中的數值也只是介面位置範例，先不要照著設定。
 
 ![圖 1-001：Design 畫面的元件樹、元件庫、預覽區與參數編輯區](../../assets/thunkable-calendar/stage1-design-overview.png)
 
@@ -100,7 +100,7 @@ Project Name（專案名稱）可填 `calendar-browser`；Category（分類）�
 
 ### 2. 加入、重新命名並設定元件（圖 1-002）
 
-從 Add Components 拖入 3 個 Label 與 2 個 Slider，再於元件樹中重新命名為 `Label_Para`、`Label_Page1`、`Slider_Page`、`Label_Size1`、`Slider_Size`。將 `Label_Para` 設為 `Page: 0, Size: 50`；另外兩個 Label 分別設為 `Page`、`Size`。`Slider_Page` 的最小值與初始值都是 `0`；`Slider_Size` 的最小值、最大值、初始值分別為 `1`、`100`、`50`，兩個 Slider 的 `Step` 都是 `1`。
+從 Add Components 拖入 3 個 Label 與 2 個 Slider，再於元件樹中重新命名為 `Label_Para`、`Label_Page1`、`Slider_Page`、`Label_Size1`、`Slider_Size`。先將 `Label_Para` 設為圖中的 `Page: NA, Size: NA`；另外兩個 Label 分別設為 `Page`、`Size`。`Slider_Page` 的最小值與初始值都是 `0`；`Slider_Size` 的最小值、最大值、初始值分別為 `1`、`100`、`50`，兩個 Slider 的 `Step` 都是 `1`。下一步加入初始化積木後，`NA` 才會更新為實際數值。
 
 ![圖 1-002：拖入 Label 與 Slider，並從元件樹選取及重新命名](../../assets/thunkable-calendar/stage1-add-and-rename-components.png)
 
@@ -164,7 +164,7 @@ Project Name（專案名稱）可填 `calendar-browser`；Category（分類）�
 
 ### 5. 初始化讀取元件（圖 2-005）
 
-回到 Stage 1 的初始化函式，將 `Result_Text` 設為「初始化」、按鈕文字設為 `GET API`。把 `Slider_index` 的最小值、最大值與目前值設為 `1`，`Step` 設為 `1` 並保持停用。
+回到 Stage 1 的初始化函式，將 `Result_Text` 設為「初始化」、按鈕文字設為 `GET API`。把 `Slider_index` 的最小值與目前值設為 `1`，最大值先設為 `Slider_Size` 的 value，`Step` 設為 `1` 並保持停用。此時索引 Slider 尚未啟用，所以不會真的讀取這個暫定範圍；Stage 4 收到資料後，最大值會改成實際清單長度。
 
 ![圖 2-005：初始化結果文字、按鈕與資料索引 Slider](../../assets/thunkable-calendar/stage2-index-initialization.png)
 
@@ -191,6 +191,8 @@ Project Name（專案名稱）可填 `calendar-browser`；Category（分類）�
 ### 1. 寫入動態查詢參數（圖 3-001）
 
 回到 Stage 1 的「更新參數顯示」函式。在更新 `Label_Para` 後，加入「set `Web_API1`'s QueryParameters」積木，使用 create object（建立物件）：`page` 填 `Slider_Page` 的 value，`size` 填 `Slider_Size` 的 value。
+
+圖的上半部是原本的「更新參數顯示」，下半部將名稱縮短成「更新參數」並加入新積木。兩者代表同一個函式，不要另外建立第二個函式。本頁可繼續保留「更新參數顯示」這個名稱。
 
 ![圖 3-001：以 create object 將兩個 Slider 值寫入 Query Parameters](../../assets/thunkable-calendar/stage3-query-parameters.png)
 
@@ -270,6 +272,16 @@ Project Name（專案名稱）可填 `calendar-browser`；Category（分類）�
 
 先確認電腦與手機登入的是同一個 Thunkable 帳號，並依官方[測試與疑難排解說明](https://docs.thunkable.com/getting-started/live-test)重新連線。若在可正常連線的 Wi-Fi 下仍長時間無回應，停止這次測試並保留畫面；不要改動 APN，也不要加入 Proxy。
 
+### 為什麼用行動網路呼叫 API 很慢，改用 Wi-Fi 卻正常？
+
+如果 Thunkable Live 的畫面更新正常，但按下 `GET API` 後等了數分鐘才收到資料；同一支手機用瀏覽器開啟 API 網址卻很快，改連 Wi-Fi 後 App 也恢復正常，表示問題可能出在「Thunkable Live 經由這個行動網路連到 API」的路徑，不代表整支手機沒有網路，也不能只憑這個現象判定 API 站方正在限流。
+
+一種可能性是手機可經由 IPv4 或 IPv6 兩種網路位址連線，但行動網路通往 API 的其中一條路徑不順；如果 App 等了較久才改試另一條路徑，API 結果就可能延遲。App 與瀏覽器也不一定採用完全相同的連線與改試方式，因此可能出現瀏覽器很快、App 卻等待很久的差異。想進一步理解這類現象，可閱讀[延伸選讀：IPv4、IPv6 與連線路徑的選擇](../../附錄-IPv4-IPv6與連線路徑.md)；完成本練習不需要先理解其中的網路標準。
+
+測試時曾觀察到，把手機 APN 暫時限制為 IPv4 後讀取恢復快速。這讓「IPv6 路徑或改試過程不順」成為合理推測，但**不能證明** Thunkable 一定使用 IPv6，也不能證明 API 伺服器完全不支援 IPv6。若要確認原因，需要使用額外工具檢查連線，不屬於本頁的操作範圍。
+
+本練習遇到這種情況時，先停止長時間等待，改用可正常上網的 Wi-Fi，再比較同一網址在手機瀏覽器與 Thunkable Live 的結果。修改 APN 會影響整支手機的行動網路，不是本頁必要步驟；若不熟悉原始設定或無法立即還原，請不要更改，也不要為了繞過問題加入第三方 Proxy。
+
 ### 為什麼 Page 上限是用 `2000` 算出來的？
 
 `TOTAL_DATA_COUNTS = 2000` 只是本頁測試用的推估上限，不是 API 提供的總筆數。實務上有些 API 不會提供總數；可用 Iterator（迭代器）的概念逐頁讀取，直到收到空清單或本頁筆數少於 `size`。這會增加狀態與停止條件，本頁先不實作。
@@ -288,6 +300,7 @@ Project Name（專案名稱）可填 `calendar-browser`；Category（分類）�
 - [Thunkable 官方：App Settings](https://docs.thunkable.com/settings/project-settings)
 - [Thunkable 官方：Web APIs Blocks](https://docs.thunkable.com/blocks/advanced-app-features/web-api)
 - [Thunkable 官方：Lists Blocks](https://docs.thunkable.com/blocks/blocks/lists)
+- [IETF RFC 8305：Happy Eyeballs Version 2](https://www.rfc-editor.org/rfc/rfc8305.html)
 
 ## 下一步
 
