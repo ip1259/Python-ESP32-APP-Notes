@@ -122,7 +122,9 @@ nav:
           - 前導技術概要: 選做-進階實務模擬專題/前導技術概要/index.md
           - MQTT:
               - MQTT 基礎：發布、訂閱與 Broker: 選做-進階實務模擬專題/前導技術概要/mqtt基礎.md
+              - PubSubClient：MQTT 函式庫介紹: 選做-進階實務模擬專題/前導技術概要/pubsubclient函式庫介紹.md
               - HiveMQ Cloud 基本設定: 選做-進階實務模擬專題/前導技術概要/hivemq-cloud-基本設定.md
+              - PubSubClient：兩個 Topic 的控制與回傳實作: 選做-進階實務模擬專題/前導技術概要/pubsubclient雙topic控制與回傳.md
           - SPI 通訊與多裝置: 選做-進階實務模擬專題/前導技術概要/spi通訊與多裝置.md
           - RC522:
               - RC522 與 MFRC522 函式庫: 選做-進階實務模擬專題/前導技術概要/rc522與mfrc522函式庫.md

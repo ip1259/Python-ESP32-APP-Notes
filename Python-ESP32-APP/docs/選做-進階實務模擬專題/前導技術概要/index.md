@@ -7,7 +7,9 @@
 ## 目前可閱讀
 
 - [MQTT 基礎：發布、訂閱與 Broker](mqtt基礎.md)
+- [PubSubClient：MQTT 函式庫介紹](pubsubclient函式庫介紹.md)
 - [HiveMQ Cloud 基本設定](hivemq-cloud-基本設定.md)
+- [PubSubClient：兩個 Topic 的控制與回傳實作](pubsubclient雙topic控制與回傳.md)
 - [SPI 通訊與多裝置](spi通訊與多裝置.md)
 - [RC522 與 MFRC522 函式庫](rc522與mfrc522函式庫.md)
 - [FastAPI：Gateway API 的基本概念](fastapi概念.md)
@@ -17,6 +19,7 @@
 
 ## 可直接進行的選做實作
 
+- [PubSubClient：兩個 Topic 的控制與回傳實作](pubsubclient雙topic控制與回傳.md)
 - [FastAPI Hello World](fastapi-hello-world實作.md)
 - [選做實作：Thunkable 瀏覽政府開放資料清單](thunkable專題資訊卡介面.md)
 
@@ -28,7 +31,7 @@
 
 ## 閱讀方式
 
-可以依照頁面排列順序閱讀，也可以先挑選目前需要的工具。各項前導主題彼此獨立，不必照順序完成，也不會互相成為前置條件。
+概念頁可以依照排列順序閱讀，也可以先挑選目前需要的工具。選做實作可能需要先完成其他頁面；開始前請以該頁「開始前」列出的條件為準。
 
 ## 下一步
 
