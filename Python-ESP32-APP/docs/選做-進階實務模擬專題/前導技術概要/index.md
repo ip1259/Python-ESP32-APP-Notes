@@ -23,12 +23,12 @@
 - [PubSubClient：兩個 Topic 的控制與回傳實作](pubsubclient雙topic控制與回傳.md)
 - [FastAPI Hello World](fastapi-hello-world實作.md)
 - [選做實作：Thunkable 瀏覽政府開放資料清單](thunkable專題資訊卡介面.md)
+- [LightBlue 與 ESP32 交換固定資料](lightblue與esp32固定資料交換.md)
 
 ## 其他選做主題
 
 - [用 `DumpInfo` 認識 RC522 與練習卡](rc522-dumpinfo練習.md)
 - [ngrok 設定本機 port](ngrok設定本機port實作.md)
-- [LightBlue 與 ESP32 交換固定資料](../../選做-既有BLE-App測試.md)
 
 ## 閱讀方式
 

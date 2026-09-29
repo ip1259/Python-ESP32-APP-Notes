@@ -3,7 +3,7 @@
 這個選做專題用讀卡、網路服務與家庭情境效果，認識多個裝置如何分工合作。
 
 !!! info "目前可閱讀內容"
-    目前可閱讀前導概念，並可獨立完成 FastAPI Hello World；其餘工具頁會分別說明可用範圍與安全限制。
+    目前可閱讀前導概念，並可獨立完成 FastAPI、PubSubClient 雙 Topic、Thunkable 開放資料與 LightBlue 固定資料交換等選做實作；各頁會分別說明前置條件、可用範圍與安全限制。
 
 ## 你會認識什麼
 
@@ -35,7 +35,7 @@ App → BLE 本地設定 → ESP32
 
 ## 專題安排
 
-[前導技術概要](前導技術概要/index.md)目前提供 MQTT、HiveMQ Cloud、SPI、RC522、FastAPI、ngrok、Thunkable 與 BLE 的基礎閱讀，以及一個可獨立完成的 FastAPI Hello World 實作。其他選做主題可從各自頁面了解目前範圍；它們彼此不互為前置條件。
+[前導技術概要](前導技術概要/index.md)目前提供 MQTT、HiveMQ Cloud、SPI、RC522、FastAPI、ngrok、Thunkable 與 BLE 的基礎閱讀，以及數項可獨立完成的選做實作。請從各頁確認需要的硬體、手機、帳號或網路；這些實作彼此不互為前置條件。
 
 ## 重點整理
 

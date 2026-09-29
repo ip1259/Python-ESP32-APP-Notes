@@ -120,4 +120,4 @@ BLE 不傳送 UID、授權結果或加密金鑰，也不替代 API 與 MQTT。�
 
 ## 下一步
 
-查看[LightBlue 與 ESP32 交換固定資料](../../選做-既有BLE-App測試.md)。這項 BLE 練習不依賴其他前導實作。
+查看[LightBlue 與 ESP32 交換固定資料](lightblue與esp32固定資料交換.md)。這項 BLE 練習不依賴其他前導實作。
