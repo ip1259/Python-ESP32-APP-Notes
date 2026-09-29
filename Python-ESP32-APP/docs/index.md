@@ -110,6 +110,7 @@ DHT11 → ESP32 → USB UART → Python → CSV／圖表／Gradio
     - [ngrok：暫時公開通道的概念](選做-進階實務模擬專題/前導技術概要/ngrok暫時通道概念.md)
       - [選做實作：ngrok 設定本機 port](選做-進階實務模擬專題/前導技術概要/ngrok設定本機port實作.md)
     - [Thunkable：App 與 Web API 的概念](選做-進階實務模擬專題/前導技術概要/thunkable與web-api概念.md)
+      - [延伸選讀：Blynk App 與 Gateway 的產品架構取捨](選做-進階實務模擬專題/前導技術概要/blynk-app與gateway產品架構取捨.md)
       - [選做實作：Thunkable 瀏覽政府開放資料清單](選做-進階實務模擬專題/前導技術概要/thunkable專題資訊卡介面.md)
     - [BLE：手機與 ESP32 的近距離設定概念](選做-進階實務模擬專題/前導技術概要/ble近距離設定概念.md)
       - [選做實作：LightBlue 與 ESP32 交換固定資料](選做-既有BLE-App測試.md)

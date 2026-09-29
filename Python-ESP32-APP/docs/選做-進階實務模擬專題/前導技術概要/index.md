@@ -15,6 +15,7 @@
 - [FastAPI：Gateway API 的基本概念](fastapi概念.md)
 - [ngrok：暫時公開通道的概念](ngrok暫時通道概念.md)
 - [Thunkable：App 與 Web API 的概念](thunkable與web-api概念.md)
+- [延伸選讀：Blynk App 與 Gateway 的產品架構取捨](blynk-app與gateway產品架構取捨.md)
 - [BLE：手機與 ESP32 的近距離設定概念](ble近距離設定概念.md)
 
 ## 可直接進行的選做實作
